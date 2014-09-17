@@ -1,0 +1,11 @@
+.jumbotron {
+    background-color: #17d1ff
+}
+
+.jumbotron .main-search {
+    margin: 3px;
+}
+
+.success {
+    text-align: center;
+}
