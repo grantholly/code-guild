@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Grant's Page</title>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <link href="style.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Hello World!</h1>
+  <p>this is my first paragraph</p>
+  <p>this is my <em>most</em> important paragraph</p>
+<h2>These are my favorite colors listed by importance descending</h2>
+<ol>
+  <li><p>green</p></li>
+  <li><p>blue</p></li>
+  <li>purple</li>
+</ol>
+  <p><strong>this is <i>my</i> bold paragraph</strong></p>
+  <p>this is a <blockquote><u>block quote</u></blockquote>and now I am done with it</p>
+  <p><a href="/mypage/other-page.html">Check out all the cool stuff at my other page</a></p>
+  <h2><a href="https://eff.org">Here's a link to EFF</a></h2>
+  <h1>Here are some pictures of me</h1>
+    <p><img align="middle" src="/mypage/media/img/me6.jpg" /> Here's me being silly</p>
+    <p><img align="left" src="/mypage/media/img/me5.jpg" /> Here's me in Astoria Oregon</p>
+    <p><img align="right" src="/mypage/media/img/me4.jpg" />Here's me and my Raspberry Pi</p>
+    <p><img align="bottom" src="/mypage/media/img/me3.jpg" />Here's me in Canada</p>
+    <a href="/mypage/other-page.html"><img src="/mypage/media/img/me2.jpg" /></a>
+    <img src="/mypage/media/img/me1.jpg" />
+  <img src="/mypage/media/img/me0.jpg" />
+  <h1>Wow, just look at this guy.</h1>
+  <img src="http://placekitten.com.s3.amazonaws.com/homepage-samples/408/287.jpg" />
+  <h1>This cat is way cuter than Grant.</h1>
+  <li><p>so is Carrie</p></li>
+  <li><p>so is Bigfoot</p></li>
+</ul>
+<table>
+    <thead>this is the table head</thead>
+    <tbody>
+        <tr>
+            <th>columns:</th>
+            <td><p><strong><u>name</u></strong></p></td>
+            <td><p><strong><u>spirit animal</u></strong></p></td>
+        </tr>
+        <tr>
+            <th>row 0:</th>
+            <td><p>Grant</p></td>
+            <td><p>squid</p></td>
+        </tr>
+        <tr>
+            <th>row 1:</th>
+            <td><p>Carrie</p></td>
+            <td><p>house cat</p></td>
+        </tr>
+    </tbody>
+</table>
+<iframe width="420" height="315" src="//www.youtube.com/embed/kxopViU98Xo" frameborder="0" allowfullscreen></iframe>
+<h1> canvas and svgs are cool</h1>
+    <script>
+	
+	var width = 800;
+	var height = 600;
+	
+        var canvas = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+                .attr("transform", "translate(50, 50)");
+
+        var pack = d3.layout.pack()
+            .size([width, height - 50])
+            .padding(10)
+
+        d3.json("bubbles.json", function(data) {
+
+            var nodes = pack.nodes(data);
+	    
+	    var node = canvas.selectAll(".node")
+		.data(nodes)
+		.enter()
+		.append("g")
+		    .attr("class", "node")
+		    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")" });
+
+	    node.append("circle")
+	        .attr("r", function(d) { return d.r; })
+		.attr("fill", "steelblue")
+		.attr("opacity", 0.25)
+		.attr("stroke", "#ADADAD")
+		.attr("stroke-width", "2");
+
+	    node.append("text")
+		.text(function(d) { return d.children ? "" : d.name });
+
+	}); 	    
+
+    </script>
+</body>
+</html>
