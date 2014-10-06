@@ -82,6 +82,18 @@
             };
         };
         
+        /*adding a method to display the list of things each person bought*/
+        
+        Diner.prototype.getPurchases = function() {
+        
+            var ticket = ""
+            
+            for (var item in this.purchased) {
+                ticket += (this.purchased[item] + ", ");
+            };
+            return ticket;
+        };
+        
         var split_it_up = function() {
             
             /*each item string in the receipt object is matched to a person in the table
@@ -118,13 +130,15 @@
                     };
                 };
                 
-                alert("You owe, $" + (table[person].owes * tip_amount).toFixed(2));
+                alert("You owe, $" + (table[person].owes * tip_amount).toFixed(2) + " for "
+                      + table[person].getPurchases());
             };
         };
         
         split_it_up();
         
         create_individualized_checks();
+      
     };
     
     var evenly_split = function() {
@@ -143,7 +157,7 @@
             };
         };
         
-        alert("the bill is $" + amount_due + " and you owe $" + you_owe);
+        alert("the bill is $" + amount_due + " and you each owe $" + you_owe);
     };
     
     var main_branch = prompt("do you want to split the bill evenly or separate the bill out?");
