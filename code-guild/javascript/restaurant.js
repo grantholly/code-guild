@@ -40,6 +40,10 @@
     
     var individual_receipts = function() {
         
+	/*create person objects from the Diner constructor for each person.
+	  Each person object will have methods for accessing what they bought
+	  and how much their indiviual bills are.*/
+
         var table = [];
         
         function Diner(name) {
@@ -132,6 +136,10 @@
     
     var evenly_split = function() {
         
+	/*calculates the total bill and divides it by the number
+	  of people in the party.  Tip is decided before the division
+	  of the check.*/
+
         var bill_tip = tip();
         
         var amount_due = (bill_total * bill_tip).toFixed(2);
