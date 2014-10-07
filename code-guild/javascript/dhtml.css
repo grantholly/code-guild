@@ -1,0 +1,11 @@
+#pick-me {
+    padding: 4px;
+    background-color: #a9a9a9;
+    border: 2px solid #000000;
+    position: absolute;
+    z-index: 3;
+    top: 100px;
+    left: 150px;
+    width: 200px;
+    height: 200px;
+}
