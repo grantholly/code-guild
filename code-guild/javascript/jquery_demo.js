@@ -6,7 +6,9 @@
         
         $("a").addClass("test");
         
-        $("a").removelass("test");
+        $("a").removeClass("test");
+
+	$("a").toggleClass("test");
         
         //select all a's and the click event on those a's will run .hide method slowly
         $("a").click(function(event) {
@@ -67,7 +69,7 @@
         
         //use a loop to create 10 items in a list
         var items = [];
-        var list = $("my-list");
+        var list = $(".my-list");
         
         for(var i = 0; i < 10; i++){
             items.push("<li>item " + i + "</li>");
@@ -86,10 +88,10 @@
             <div class="surrogateParent2"></div>
         </div>
         
-        $("span.subchild").parent(); //<div class="child">
-        $("span.bubchild").parents("div.parent"); //<div class="parent">
-        $("span.subchild").parents(); //everything above it
-        $("span.subchild").parentsUntil("div.grandparent"); //<div class="parent"> <div class="child">
+        $("span.grandchild").parent(); //<div class="child">
+        $("span.grandchild").parents("div.parent"); //<div class="parent">
+        $("span.grandchild").parents(); //everything above it
+        $("span.grandchild").parentsUntil("div.grandparent"); //<div class="parent"> <div class="child">
         
         $("div.grandparent").children("div"); //all decendant divs
         $("div.grandparent").find("div") //find all divs under

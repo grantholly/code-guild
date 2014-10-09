@@ -7,10 +7,61 @@
 </head>
 <body>
   <a href="http://jquery.com/">jQuery</a>
+  <h1></h1>
+  <p id="user-post"></p>
+  <div id="add-stuff-here"></div>
   <script src="/jquery-2.1.1.js"></script>
+  <ul class="my-list">
+    <li>the list</li>
+  </ul>
+  <div class="grandparent">
+    <div class="parent">
+        <div class="child">
+            <span class="grandchild"></span>
+        </div>
+    </div>
+    <div class="surrogateParent1"></div>
+    <div class="surrogateParent2"></div>
+  </div>
 <script>
     $(document).ready(function() {
         //here we go
+        $("a").attr({title: "all the titles are the same",
+                    href: "a-new-link-for-all.html"})
+        
+        $("h1").html("hello world");    
+        
+        $("#user-post")
+            .html("this is the 3rd post")
+            .clone()
+            .appendTo("#my-div");
+        
+        $("a").click(function(event) {
+            event.preventDefault();
+            $(this).hide("slow"); 
+        })
+        
+        $("<p>This is a new p element</p>").appendTo("#add-stuff-here");
+        
+        var thing_to_add = $("<p>This is a new p element</p>");
+        
+        //thing_to_add.appendTo("#add-stuff-here");
+        
+        //thing_to_add.insertAfter("#add-stuff-here");
+        
+        var items = [];
+        var list = $(".my-list");
+        
+        for(var i = 1; i <= 10; i++){
+            items.push("<li>item " + i + "</li>");
+        }
+        
+        list.append(items.join(""));
+        
+        var parents = $("span.grandchild").parents("div.parent");
+        console.log(parents);
+        
+        $("my-list").css("color: red");
     });
 </script>
 </body>
