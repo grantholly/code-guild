@@ -1,0 +1,15 @@
+.parent {
+    border: solid black 4px;
+    width: 250px;
+    height: 250px;
+    background-color: #a9a9a9;
+    opacity: 0.5;
+}
+
+.active-hover {
+    background-color: #fff444;
+}
+
+#inner-boxes {
+    border: solid black 1px;
+}
