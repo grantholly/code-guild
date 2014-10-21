@@ -1,0 +1,22 @@
+#getting started with django#
+
+1. sudo pip install virtualenvwrapper
+
+2. export WORKON_HOME=~/Envs
+
+3. mkdir -p $WORKON_HOME
+
+4. source /usr/local/bin/virtualenvwrapper.sh
+
+5. mkvirtualenv tutorial
+
+6. source ~/Envs/tutorial/bin/activate
+
+7. cd ~/Envs/tutorial/
+
+8. pip install django
+
+9. django-admin.py startproject mysite
+
+10. python manage.py runserver
+
