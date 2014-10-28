@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <title>bubbles</title>
+</head>
+<body>
+
+    <script>
+	
+	var width = 800;
+	var height = 600;
+	
+        var canvas = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+                .attr("transform", "translate(50, 50)");
+
+        var pack = d3.layout.pack()
+            .size([width, height - 50])
+            .padding(10)
+
+        d3.json("bubbles.json", function(data) {
+
+            var nodes = pack.nodes(data);
+	    
+	    var node = canvas.selectAll(".node")
+		.data(nodes)
+		.enter()
+		.append("g")
+		    .attr("class", "node")
+		    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")" });
+
+	    node.append("circle")
+	        .attr("r", function(d) { return d.r; })
+		.attr("fill", "steelblue")
+		.attr("opacity", 0.25)
+		.attr("stroke", "#ADADAD")
+		.attr("stroke-width", "2");
+
+	    node.append("text")
+		.text(function(d) { return d.children ? "" : d.name });
+
+	}); 	    
+
+    </script>
+
+</body>
+</html>

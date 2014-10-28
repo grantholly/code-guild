@@ -1,0 +1,13 @@
+{
+"name": "Globe",
+"value": 100,
+"children": [
+    {"name": "Europe", "value": 10},
+    {"name": "Asia", "value": 80},
+    {"name": "North America", "value": 50},
+    {"name": "South America", "value": 30},
+    {"name": "Africa", "value": 40},
+    {"name": "Australia", "value": 15},
+    {"name": "Antarctica", "value": 30}
+]
+}

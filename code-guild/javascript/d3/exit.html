@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <title></title>
+    <!-- if there are less DOM elements than elements in your data,
+    you use the .enter() method to create place holders for all the
+    data elements that get created into DOM elements.
+
+    if there are the same number of DOM elements and data elements,
+    the .enter() method will update existing DOM elements.
+
+    if there are more DOM elements than data elements, you use the
+    .exit() method to prune or target DOM elements that are not bound
+    to a data element by the by the selection.  -->
+</head>
+<body>
+    <script>
+        var data = [10];
+
+                var canvas = d3.select("body")
+                                .append("svg")
+                                .attr("width", 500)
+                                .attr("height", 500);
+
+                var circle0 = canvas.append("circle")
+                                .attr("cx", 50)
+                                .attr("cy", 100)
+                                .attr("r", 25);
+
+                var circle1 = canvas.append("circle")
+                                .attr("cx", 50)
+                                .attr("cy", 200)
+                                .attr("r", 25);
+
+                var circles = canvas.selectAll("circle")
+                                .data(data)
+                                .attr("fill", "green")
+                                .exit()
+                                    .attr("fill", "blue");
+    </script>
+</body>
+</html>

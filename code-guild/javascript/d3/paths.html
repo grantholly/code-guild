@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <title></title>
+</head>
+<body>
+
+    <script>
+
+        var canvas = d3.select("body").append("svg")
+            .attr("width", 500)
+            .attr("width", 500);
+
+        var data = [
+            {x:10, y:20},
+            {x:30, y:50},
+            {x:15, y:75}
+        ];
+
+        var group = canvas.append("g")
+            .attr("transform", "translate(100, 100)");
+
+        var line = d3.svg.line()
+            .x(function(d) { return d.x; })
+            .y(function(d) { return d.y; });
+
+        group.selectAll("path")
+            .data([data])
+            .enter()
+                .append("path")
+                .attr("d", line)
+                .attr("fill", "none")
+                .attr("stroke", "black")
+                .attr("stroke-width", 10);
+
+    </script>
+
+</body>
+</html>

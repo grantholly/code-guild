@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <title></title>
+    <!-- the angle of the arc is measured in radians-->
+</head>
+<body>
+
+    <script>
+
+        var canvas = d3.select("body").append("svg")
+            .attr("width", 500)
+            .attr("height", 500);
+
+        var group = canvas.append("g")
+            .attr("transform", "translate(100, 100)");
+
+        var r = 100;
+        var p = Math.PI * 2;
+
+        var arc = d3.svg.arc()
+            .innerRadius(r - 20)
+            .outerRadius(r)
+            .startAngle(0)
+            .endAngle(p - 1);
+
+        group.append("path")
+            .attr("d", arc);
+
+    </script>
+
+</body>
+</html>

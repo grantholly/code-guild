@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <title></title>
+</head>
+<body>
+<script>
+        var canvas = d3.select("body").append("svg")
+                        .attr("width", 500)
+                        .attr("height", 500);
+
+        var circle = canvas.append("circle")
+                        .attr("cx", 250)
+                        .attr("cy", 250)
+                        .attr("r", 50)
+                        .attr("fill", "red");
+
+        circle.transition()
+            .duration(2000)
+            .delay(1000)
+            .attr("cx", 150)
+            .attr("cy", 150)
+            .transition()
+                .attr("cx", 300)
+                .each("end", function() { d3.select(this).attr("fill", "green"); });
+
+</script>
+</body>
+</html>
