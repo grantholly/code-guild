@@ -1,0 +1,13 @@
+{% if registered_members.count > 0 %}
+
+{% for member in registered_members %}
+    
+    <p>{% member.first_name %} {% member.last_name %} {% member.email %}</p>
+    
+{% endfor %}
+
+{% else %}
+
+    <p>Looks like there nobody's registered with that name</p>
+    
+{% endif %}

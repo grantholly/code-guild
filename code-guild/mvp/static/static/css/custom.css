@@ -1,0 +1,12 @@
+.jumbotron {
+    background-color: #17d1ff;
+}
+
+.jumbotron .container .row .ajax-search .main-search {
+    margin: 3px;
+}
+
+.success {
+    text-align: center;
+}
+
