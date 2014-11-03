@@ -45,6 +45,7 @@ def register(request):
 	    return HttpResponseRedirect('/register_success')
     else:
 	form = MyRegistrationForm()
+
     token = {}
     token.update(csrf(request))
     token['form'] = form
