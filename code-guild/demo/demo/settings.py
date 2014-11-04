@@ -16,11 +16,11 @@ SETTINGS_DIR = os.path.dirname(__file__)
 # /home/grant/demo/demo
 PROJECT_PATH = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
 # /home/grant/demo
-TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates/')
+TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 # /home/grant/demo/templates
-STATIC_PATH = os.path.join(PROJECT_PATH, 'static/')
+STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 # /home/grant/demo/static
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media/')
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 # /home/grant/demo/media
 
 # Quick-start development settings - unsuitable for production

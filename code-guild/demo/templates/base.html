@@ -20,7 +20,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="{{ STATIC_URL }}signups/css/jumbotron.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/jumbotron.css" %}">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -58,6 +58,7 @@
         {% endblock content %}
         <p>Django is a python powered web development framework</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+		<p>{{ STATIC_URL }}</p>
       </div>
     </div>
 
