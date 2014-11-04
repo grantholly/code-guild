@@ -11,12 +11,17 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+# /home/grant/demo
 SETTINGS_DIR = os.path.dirname(__file__)
+# /home/grant/demo/demo
 PROJECT_PATH = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
-TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
-STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
-
+# /home/grant/demo
+TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates/')
+# /home/grant/demo/templates
+STATIC_PATH = os.path.join(PROJECT_PATH, 'static/')
+# /home/grant/demo/static
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media/')
+# /home/grant/demo/media
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -88,8 +93,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
@@ -97,4 +100,3 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     TEMPLATE_PATH,
 )
-
