@@ -6,6 +6,7 @@ from .models import SignUp
 # Create your views here.
 
 def signup(request):
+
     form = SignUpForm(request.POST or None)
 
     if form.is_valid():

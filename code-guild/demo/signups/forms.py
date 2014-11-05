@@ -13,7 +13,6 @@ class SignUpForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         super(SignUpForm, self).__init__(*args, **kwargs)
-        self.helper.form_id = "signup"
         self.helper.form_class = "form-inline"
         self.helper.layout = Layout("first_name", "last_name", "email")
         self.helper.form_method = "post"
