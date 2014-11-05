@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^register_success/$', 'demo.views.register_success', name='register_success'),
     
     # signup urls
-    url(r'^$', 'signups.views.home', name='home'),
+    url(r'^$', 'signups.views.signup', name='signup'),
 
     # admin urls
     url(r'^admin/', include(admin.site.urls)),

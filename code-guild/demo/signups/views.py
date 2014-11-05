@@ -5,13 +5,12 @@ from .forms import SignUpForm
 from .models import SignUp
 # Create your views here.
 
-def home(request):
-    
+def signup(request):
     form = SignUpForm(request.POST or None)
 
     if form.is_valid():
-	save_post = form.save()
-	messages.success(request, "You are signed up!")
+        save_post = form.save()
+        messages.success(request, "You are signed up!")
 
-    return render_to_response("signup.html", locals(), 
-			       context_instance=RequestContext(request))
+    return render_to_response("signup.html", locals(),
+                               context_instance=RequestContext(request))
