@@ -1,16 +1,10 @@
-from django.shortcuts import render, render_to_response
+from django.views import generic
 
+from . import models
 # Create your views here.
 
-def blog_index(request):
-    context = {}
-    return render_to_response('blog.html', context)
 
+class BlogIndex(generic.ListView):
+    queryset = models.BlogPost.objects.published()
+    template_name = "blog_home.html"
 
-def post(request):
-    context = {}
-    return render_to_response('write_post.html', context)
-
-class DetailView(generic.DetailView):
-    model = BlogPost
-    template = ''

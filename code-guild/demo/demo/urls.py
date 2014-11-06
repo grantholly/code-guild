@@ -21,6 +21,10 @@ urlpatterns = patterns('',
     # signup urls
     url(r'^$', 'signups.views.signup', name='signup'),
 
+    # blog urls
+    url(r'^blogs/$', include('blog.urls')),
+
     # admin urls
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^markdown/', include('django_markdown.urls')),
 )

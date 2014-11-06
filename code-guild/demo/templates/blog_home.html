@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load django_markdown %}
+
+{% block blog %}
+
+  {% for object in object_list %}
+    <div class="post">
+      <h1>{{ object.title }}</h1>
+      <p class="post-date">{{ object.created }}</p>
+        <div class="post-body">
+          {{ object.body|markdown }}
+        </div>
+    </div>
+  {% endfor %}
+
+{% endblock %}
