@@ -15,6 +15,8 @@ class BlogPost(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=250, unique=True)
+    upvotes = models.IntegerField(default=0)
+    downvotes = models.IntegerField(default=0)
 
     objects = BlogPostQuerySet.as_manager()
 
