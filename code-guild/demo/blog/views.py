@@ -10,6 +10,7 @@ class BlogIndex(generic.ListView):
 
 def upvote(request):
     # handler for XHR POST request
-
+    pass
 def downvote(request):
     # handler for XHR POST request
+    pass
