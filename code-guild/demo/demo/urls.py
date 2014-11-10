@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^register_success/$', 'demo.views.register_success', name='register_success'),
     
     # signup urls
-    url(r'^$', 'signups.views.signup', name='signup'),
+    url(r'^$', include('signups.urls')),
 
     # blog urls
     url(r'^blogs/$', include('blog.urls')),

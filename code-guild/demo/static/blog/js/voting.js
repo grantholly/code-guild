@@ -1,19 +1,68 @@
 $(document).ready(function () {
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    function sameOrigin(url) {
+        // test that a given url is a same-origin URL
+        // url could be relative or scheme relative or absolute
+        var host = document.location.host; // host + port
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        // Allow absolute or scheme relative URLs to same origin
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+            // or any other URL that isn't scheme relative or absolute i.e relative.
+            !(/^(\/\/|http:|https:).*/.test(url));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                // Send the token to same-origin, relative URLs only.
+                // Send the token only if the method warrants CSRF protection
+                // Using the CSRFToken value acquired earlier
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
     function vote (blogId, vote) {
 	$.ajax({
 	    type: "POST",
-	    url: "/blogs/vote/",
+	    url: "vote/",
 	    data: {"blogId": blogId, "vote": vote},
-	    success: function (res) {
+	    success: function (json) {
 		$("#blog-vote-up-" + blogId).hide();
 		$("#blog-vote-down-" + blogId).hide();
 		
 		if (res.vote === "up") {
-		    $("#upvotes").html(res.votes)
+		    $("#upvotes").html(json.votes);
 		}
 		if (res.votes === "down") {
-		    $("downvotes").html(res.votes)
+		    $("downvotes").html(json.votes);
 		}
+	    },
+	    error : function (xhr) {
+		console.log(xhr.status + ": " + xhr.responseText);
 	    }
 	});
 	return false;
@@ -23,10 +72,10 @@ $(document).ready(function () {
 	var blogId = parseInt(this.id.split("-")[3]);
 	
 	if (this.id.split("-")[2] === "up") {
-	    return vote(blogId, "up")
+	    return vote(blogId, "up");
   	}
 	if (this.id.split("-")[2] === "down") {
-	    return vote(blogId, "down")
+	    return vote(blogId, "down");
 	}
     })
-})
+});
