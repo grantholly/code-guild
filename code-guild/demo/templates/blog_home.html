@@ -5,6 +5,7 @@
 
   {% for object in object_list %}
     <div class="post">
+      {% csrf_token %}
       <h1>{{ object.title }}</h1>
       <p class="post-date">{{ object.created }}</p>
         <img class="vote" id="blog-vote-up-{{ object.id }}" data-vote="upvote" src="http://wscont1.apps.microsoft.com/winstore/1x/aa5b4c58-bc4c-4f62-b3a7-f1e315562a77/Icon.271701.png"></img>

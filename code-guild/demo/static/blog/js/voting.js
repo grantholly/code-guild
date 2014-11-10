@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie != '') {
@@ -21,61 +21,51 @@ $(document).ready(function () {
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
     }
-    function sameOrigin(url) {
-        // test that a given url is a same-origin URL
-        // url could be relative or scheme relative or absolute
-        var host = document.location.host; // host + port
-        var protocol = document.location.protocol;
-        var sr_origin = '//' + host;
-        var origin = protocol + sr_origin;
-        // Allow absolute or scheme relative URLs to same origin
-        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-            // or any other URL that isn't scheme relative or absolute i.e relative.
-            !(/^(\/\/|http:|https:).*/.test(url));
-    }
     $.ajaxSetup({
         beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                // Send the token to same-origin, relative URLs only.
-                // Send the token only if the method warrants CSRF protection
-                // Using the CSRFToken value acquired earlier
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
         }
-    });
+    });    
 
-    function vote (blogId, vote) {
+    function upVote (blogId) {
 	$.ajax({
 	    type: "POST",
-	    url: "vote/",
-	    data: {"blogId": blogId, "vote": vote},
-	    success: function (json) {
+	    url: "/blogs/vote/",
+	    data: {"blogId": blogId, "vote": "up"},
+	    success: function (data) {
 		$("#blog-vote-up-" + blogId).hide();
 		$("#blog-vote-down-" + blogId).hide();
-		
-		if (res.vote === "up") {
-		    $("#upvotes").html(json.votes);
-		}
-		if (res.votes === "down") {
-		    $("downvotes").html(json.votes);
-		}
+		$("#upvotes").html(data.votes)
 	    },
-	    error : function (xhr) {
-		console.log(xhr.status + ": " + xhr.responseText);
-	    }
 	});
 	return false;
     }
 
+    function downVote (blogId) {
+        $.ajax({
+            type: "POST",
+            url: "/blogs/vote/",
+            data: {"blogId": blogId, "vote": "down"},
+            success: function (data) {
+                $("#blog-vote-up-" + blogId).hide();
+                $("#blog-vote-down-" + blogId).hide();
+		$("#downvotes").html(data.votes)
+            },
+        });
+        return false;
+    }
+
+    
     $("img.vote").click(function () {
 	var blogId = parseInt(this.id.split("-")[3]);
-	
 	if (this.id.split("-")[2] === "up") {
-	    return vote(blogId, "up");
-  	}
+	    return upVote(blogId);
+	}
 	if (this.id.split("-")[2] === "down") {
-	    return vote(blogId, "down");
+	    return downVote(blogId);
 	}
     })
+    
 });

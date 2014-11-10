@@ -12,20 +12,19 @@ class BlogIndex(generic.ListView):
     template_name = "blog_home.html"
 
 def vote(request):
-    if not request.method == "POST":
-	raise Http404
-    response = {}
-    blog_post_id = request.POST.get("blogId", "")
-    vote = request.POST.get("vote", "")
-    blog = BlogPost.objects.get(pk=blog_post_id)
-    if blog:
-	if vote == "up":
+    if request.is_ajax() and request.POST:
+	data = {}
+	blog = BlogPost.objects.get(pk=request.POST.get("blogId", ''))
+        if request.POST.get("vote") == "up":
 	    blog.upvotes += 1
-	    response["votes"] = blog.upvotes
 	    blog.save()
-	if vote == "down":
+	    data["votes"] = blog.upvotes
+	    return HttpResponse(json.dumps(data), content_type="application/json")	
+        if request.POST.get("vote") == "down":
 	    blog.downvotes += 1
-	    response["votes"] = blog.downvotes
 	    blog.save()
-    json.dumps(response)
-    return HttpResponse(response, content_type="application/json")
+	    data["votes"] = blog.downvotes
+	    return HttpResponse(json.dumps(data), content_type="application/json")
+    else:
+	return Http404		
+	

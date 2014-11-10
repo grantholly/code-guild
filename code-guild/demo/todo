@@ -1,0 +1,4 @@
+- apply blog css
+- move all app specific script and link tags into a block and plug block into base
+- name space ajax request urls
+

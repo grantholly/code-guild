@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, url
 
-from . import views
+from blog.views import BlogIndex
 
 urlpatterns = patterns('',
     #blog urls
-    url(r'^$', views.BlogIndex.as_view(), name='index'),
-    url(r'^vote/$', 'views.vote', name='vote'),
+    url(r'^$', BlogIndex.as_view(), name='index'),
+    url(r'^vote/$', 'blog.views.vote', name='vote'),
 )

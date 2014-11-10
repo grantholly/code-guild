@@ -23,6 +23,7 @@ urlpatterns = patterns('',
 
     # blog urls
     url(r'^blogs/$', include('blog.urls')),
+    url(r'^blogs/vote/$', 'blog.views.vote', name='vote'),
 
     # admin urls
     url(r'^admin/', include(admin.site.urls)),
