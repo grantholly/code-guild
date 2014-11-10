@@ -1,35 +1,32 @@
 $(document).ready(function () {
-	var blogId,
-	    target,
-	    vote;
+    function vote (blogId, vote) {
+	$.ajax({
+	    type: "POST",
+	    url: "/blogs/vote/",
+	    data: {"blogId": blogId, "vote": vote},
+	    success: function (res) {
+		$("#blog-vote-up-" + blogId).hide();
+		$("#blog-vote-down-" + blogId).hide();
+		
+		if (res.vote === "up") {
+		    $("#upvotes").html(res.votes)
+		}
+		if (res.votes === "down") {
+		    $("downvotes").html(res.votes)
+		}
+	    }
+	});
+	return false;
+    }
 
-	blogId = $(this).attr("data-blog-id");
-
-	function handleVote (data, vote) {
-		$(vote + "votes").html(data);
-		$("#upvotes").hide();
-		$("#downvotes").hide();
+    $("img.vote").click(function () {
+	var blogId = parseInt(this.id.split("-")[3]);
+	
+	if (this.id.split("-")[2] === "up") {
+	    return vote(blogId, "up")
+  	}
+	if (this.id.split("-")[2] === "down") {
+	    return vote(blogId, "down")
 	}
-
-	function vote (event) {
-		target = event.target;
-		$(target).click(function () {
-			if target === $("#upvote") {
-				vote = "up";		
-			}
-			if target === $("#downvote") {
-				vote = "down";
-			}
-			$.get("/blogs/vote",
-			{"blog_id": blog_id, "vote" = vote},
-			voteHandler
-			)
-		})		
-	}
-
-	$.get("/blogs/upvote/", {blog_id: blog_id}, function (data) {
-		$("#upvotes").html(data);
-		$("#upvote").hide();
-		$("#downvote").hide();
-	})
+    })
 })

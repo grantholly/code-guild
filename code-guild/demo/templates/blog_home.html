@@ -7,9 +7,9 @@
     <div class="post">
       <h1>{{ object.title }}</h1>
       <p class="post-date">{{ object.created }}</p>
-        <img class="vote" data-vote="upvote" data-blog-id="{{ object.id }}" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8uKC4sJCYxJycfLDwtLDUvLy46LCVDRDc+NzQ8NDQBCgoKDg0NGhAQGjIkHyUtKy0sODQ3LCwtNDc0NywsNCwxLCwsLCwsLDAvLDQsLCwsLDQsLCw0LCwsLiwsLCssK//AABEIAC4ALgMBEQACEQEDEQH/xAAbAAACAgMBAAAAAAAAAAAAAAAFBgQHAAEDCP/EAC0QAAIBAwIFAgQHAAAAAAAAAAECAwAEEQUSBhMhMVFBYRRScbEHIyQyM4Gh/8QAGgEAAgMBAQAAAAAAAAAAAAAAAgMABAUBBv/EACURAAICAQQCAQUBAAAAAAAAAAABAgMREiEiMQRBYRMyUXGBFP/aAAwDAQACEQMRAD8AvGoQ0TgE1xvCIQtJ1KPUoHdcB43KOuexpHjXq6OffsbbW4MnVYFA6bWrGHUotPeX9RIcAAdM+M0h+RBWaPYxVScdQRp4syoQHanqUdsjxplpSMew+tU/I8qME4rsfVS5bvoSo7ifSrxvhHYSSDLnvu/qsWMrKpcHuX3psjyWxJvOJtWFs4tyjPj5cEfSrD829bNi40VMU+Hri51LiuBS25Y50y7erZyaZXHeH5bCk0oy/RdNbRlmmO1SfArjeEQQuL7Z7wwRw3otH5gkdw+GYeMZrLlxbenJai8rGcA/VjPZIJrODnzN0PXsPNVa0vqch83x2ImgDVL2B59Stkgk3HAB6svoSPSitpWvg8oGFj08gvpdkq8QWE5HLxJk4HRjg4/2g8eOi+OQ5z1VSRYVegM05XWfhpMfKaCz7Gdj2eevxFjeTjASXE8kCkJ1XPYUmqS0hSW4/wBnq1rIIIudG77AAAwJPSqU0nPOB8c6Qis6j+NME+KmUujmH7OumCSbWLVMDAbecegFDBOV0V8hPaDY61sFQ0yhlKnsRiuNZWCCJxBpVvLc7b2BXZf2EjuKyLHKuTRbjiSyCLeytbNs20EcZ8haW5t9sPAQV1VMK24/aiysA43GLhbT5YebeXCkNINsYPcL5q14VMk3ZL+C7pppRQw1oFcyoQ43VrBdx8u4jDr7+lBOuM1iSOxk49Al+FdNZ935w9uZ0qv/AIq/kZ9aROtNIsbTBht1yOxbqabCiuPSAc5MnU4EyoQ//9k="/></img>
+        <img class="vote" id="blog-vote-up-{{ object.id }}" data-vote="upvote" src="http://wscont1.apps.microsoft.com/winstore/1x/aa5b4c58-bc4c-4f62-b3a7-f1e315562a77/Icon.271701.png"></img>
 	<p style="display: inline-block;">updoges: <span id="upvotes">{{ object.upvotes }}</span></p>
-	<img class="make" data-vote="downvote" data-blog-id="{{ object.id }}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKmkrKEMSTnjUt9Dfp2ffM5LbzehUKxUrUgAygzmkO24DeMzzJ7w"></img>
+	<img class="vote" id="blog-vote-down-{{ object.id }}" data-vote="downvote" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKmkrKEMSTnjUt9Dfp2ffM5LbzehUKxUrUgAygzmkO24DeMzzJ7w"></img>
 	<p style="display: inline-block;">downrushes: <span id="downvotes">{{ object.downvotes }}</span></p>
 	<div class="post-body">
           {{ object.body|markdown }}
