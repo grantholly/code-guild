@@ -3,8 +3,7 @@ import json
 from django.views import generic
 from django.http import HttpResponse, Http404
 
-from models import BlogPost, Comment
-# Create your views here.
+from models import BlogPost
 
 
 class BlogIndex(generic.ListView):
