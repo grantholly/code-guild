@@ -5,5 +5,5 @@
 - results not updating correctly after first blog post
 - link logins to voting maybe?
 
-- make comments for blog posts
+- use builtin django.contrib.comments to add comments 
 - make author properties for comments and blog posts
