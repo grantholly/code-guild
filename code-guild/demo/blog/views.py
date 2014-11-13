@@ -3,7 +3,7 @@ import json
 from django.views import generic
 from django.http import HttpResponse, Http404
 
-from models import BlogPost
+from models import BlogPost, Comment
 # Create your views here.
 
 
@@ -28,3 +28,9 @@ def vote(request):
     else:
 	return Http404		
 	
+def comment(request):
+    if request.is_ajax() and method == "POST":
+	new_comment = Comment()
+	data = {}
+	# return the newly created comment
+    return HttpResponse(data)

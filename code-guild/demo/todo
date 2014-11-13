@@ -4,3 +4,6 @@
 - name space ajax request urls
 - results not updating correctly after first blog post
 - link logins to voting maybe?
+
+- make comments for blog posts
+- make author properties for comments and blog posts
