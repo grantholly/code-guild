@@ -25,3 +25,4 @@ class BlogPost(models.Model):
 	verbose_name = "Blog Post"
 	ordering = ["-created"]
 
+    

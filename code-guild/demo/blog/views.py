@@ -19,11 +19,15 @@ def vote(request):
 	    blog.upvotes += 1
 	    blog.save()
 	    data["votes"] = blog.upvotes
+	    data["vote"] = "up"
+	    data["id"] = blog.id
 	    return HttpResponse(json.dumps(data), content_type="application/json")	
         if request.POST.get("vote") == "down":
 	    blog.downvotes += 1
 	    blog.save()
 	    data["votes"] = blog.downvotes
+	    data["vote"] = "down"
+	    data["id"] = blog.id
 	    return HttpResponse(json.dumps(data), content_type="application/json")
     else:
 	return Http404		
