@@ -10,6 +10,7 @@ from models import BlogPost, Comment
 class BlogIndex(generic.ListView):
     queryset = BlogPost.objects.published()
     template_name = "blog_home.html"
+    context_object_name = "blog_posts"
 
 def vote(request):
     if request.is_ajax() and request.POST:
@@ -28,9 +29,3 @@ def vote(request):
     else:
 	return Http404		
 	
-def comment(request):
-    if request.is_ajax() and method == "POST":
-	new_comment = Comment()
-	data = {}
-	# return the newly created comment
-    return HttpResponse(data)
