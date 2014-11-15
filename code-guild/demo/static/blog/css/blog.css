@@ -1,0 +1,13 @@
+.comments p {
+    display: inline-block;
+}
+
+.add-comment {
+    margin-right: 2em;
+}
+
+.voting p, img {
+    display: inline-block;
+    font-weight: bold;
+}
+
