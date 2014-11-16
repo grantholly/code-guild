@@ -64,7 +64,8 @@ $(document).ready(function () {
     })
 
     $(".add-comment").click(function () {
-	$(".comment-active-area").toggle("fast");
+	var blogId = this.id.split("-")[2];
+	$("#blog-commenting-" + blogId).toggle("fast");
     })
 
     $(".post-button").click(function (ev) {

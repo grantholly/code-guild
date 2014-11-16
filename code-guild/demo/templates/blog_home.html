@@ -18,10 +18,10 @@
           {{ blog.body|markdown }}
         </div>
         <div class="comments" data-slug={{ blog.slug }}>
-          <a href="/post_comment/" class="add-comment"><p>comment</p></a>
-          <a href="/get_comments/" class="get-comments"><p>read the drivel</p></a>
+          <a href="/post_comment/" id="post-comment-{{ blog.id }}" class="add-comment"><p>comment</p></a>
+          <a href="/get_comments/" id="get-comments-{{ blog.id }}" class="get-comments"><p>read the drivel</p></a>
         </div>
-        <div class="comment-active-area">
+        <div id="blog-commenting-{{ blog.id }}" class="comment-active-area">
 	  <form action="" method="POST">
 	    <textarea id="post-comment-{{ blog.id }}" class="form-control" placeholder="be a supreme jerk" rows="4"></textarea>
 	    <button type="submit" id="submit-comment-{{ blog.id }}" class="btn btn-primary btn-xs post-button">Take that!</button>
