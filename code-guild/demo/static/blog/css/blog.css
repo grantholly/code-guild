@@ -1,9 +1,21 @@
+/*comments*/
+
 .comments p {
     display: inline-block;
 }
 
 .add-comment {
     margin-right: 2em;
+}
+
+.post-button {
+    margin-top: 1em;
+}
+
+/*voting*/
+
+.voting {
+    margin-bottom: 1em;
 }
 
 .voting p, img {

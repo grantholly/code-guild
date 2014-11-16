@@ -52,25 +52,25 @@ $(document).ready(function () {
 	})
     }
 
-    $("a .get-comments").click(function (ev) {
+    $(".comments a").click(function (ev) {
 	ev.preventDefault();
-	//show the associated comments with ajax
-	return getComments(blogId)
     })
 
-    $("a .add-comment").click(function (ev) {
+    $(".post-button").click(function (ev) {
 	ev.preventDefault();
-	//append the comment form to the DOM
-	//or do some silly bootstrap modal box
+	var blogId = parseInt(this.id.split("-")[2]),
+	    comment = $("#post-comment-" + blogId).val();
+	return addComment(blogId, comment);
     })
 
-    $(".add-comment").submit(function (ev) {
-	var blogId,
-	    comment;
-	ev.preventDefualt();
-	blogId = parseInt(this.id.split("-")[3]);
-	//get comment from textarea
-	return addComment(blogId, comment)
+    $(".add-comment").click(function () {
+	$(".comment-active-area").toggle("fast");
+    })
+
+    $(".post-button").click(function (ev) {
+	//var blogId = parseInt(this.id.split("-")[2]),	    
+	//   var comment = $("#post-comment" + blogId).val();
+	//addComment(blogId, comment);
     })
 
 });

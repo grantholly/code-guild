@@ -22,6 +22,10 @@
           <a href="/get_comments/" class="get-comments"><p>read the drivel</p></a>
         </div>
         <div class="comment-active-area">
+	  <form action="" method="POST">
+	    <textarea id="post-comment-{{ blog.id }}" class="form-control" placeholder="be a supreme jerk" rows="4"></textarea>
+	    <button type="submit" id="submit-comment-{{ blog.id }}" class="btn btn-primary btn-xs post-button">Take that!</button>
+	  </form>
         </div>
     </div>
   {% endfor %}
