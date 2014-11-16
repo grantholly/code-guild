@@ -12,6 +12,10 @@
     margin-top: 1em;
 }
 
+.comment-active-area {
+    display: none;
+}
+
 /*voting*/
 
 .voting {
