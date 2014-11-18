@@ -26,3 +26,9 @@ class BlogPost(models.Model):
 	ordering = ["-created"]
 
     
+class Comment(models.Model):
+    blog = models.ForeignKey("BlogPost")
+    body = models.CharField(max_length=500)
+
+    def __unicode__(self):
+	return "blog = {0} / comment = {1}".format(self.blog, self.body)
