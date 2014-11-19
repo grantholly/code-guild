@@ -3,7 +3,7 @@ import json
 from django.views import generic
 from django.http import HttpResponse, Http404
 
-from models import BlogPost
+from .models import BlogPost, Comment
 
 
 class BlogIndex(generic.ListView):
@@ -38,5 +38,5 @@ def add_comment(request):
 	blog = BlogPost.objects.get(pk=request.POST.get("blogId", ""))
 	comment = request.POST.get("comment", "")
 	new_comment = Comment(blog=blog, body=comment)
-	data.update({"comment": comment.body, "blogId": blog.id, "commentId": comment.id})
+	data.update({"comment": new_comment.body, "blogId": blog.id, "commentId": new_comment.id})
 	return HttpResponse(json.dumps(data), content_type="application/json")
