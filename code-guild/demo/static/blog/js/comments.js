@@ -59,7 +59,8 @@ $(document).ready(function () {
     $(".post-button").click(function (ev) {
 	ev.preventDefault();
 	var blogId = parseInt(this.id.split("-")[2]),
-	    comment = $("#post-comment-" + blogId).val();
+	    comment = $("#comment-text-" + blogId).val();
+	    console.log(comment);
 	return addComment(blogId, comment);
     })
 

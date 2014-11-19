@@ -38,5 +38,6 @@ def add_comment(request):
 	blog = BlogPost.objects.get(pk=request.POST.get("blogId", ""))
 	comment = request.POST.get("comment", "")
 	new_comment = Comment(blog=blog, body=comment)
+	new_comment.save()
 	data.update({"comment": new_comment.body, "blogId": blog.id, "commentId": new_comment.id})
 	return HttpResponse(json.dumps(data), content_type="application/json")
