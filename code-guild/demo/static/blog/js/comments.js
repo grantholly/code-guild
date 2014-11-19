@@ -32,7 +32,7 @@ $(document).ready(function () {
     function getComments (blogId) {
 	$.ajax({
 	    "method": "GET",
-	    "url": "/blogs/get_comments",
+	    "url": "get_comments/",
 	    "data": {"blogId": blogId},
 	    "success": function (data) {
 		//update the DOM with related comments
@@ -43,7 +43,7 @@ $(document).ready(function () {
     function addComment (blogId, comment) {
 	$.ajax({
 	    "method": "POST",
-	    "url": "blogs/add_comment/",
+	    "url": "add_comment/",
 	    "data": {"blogId": blogId, "comment": comment},
 	    "success": function (data) {
        		//update the DOM and hide the comment
