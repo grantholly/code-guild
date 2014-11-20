@@ -47,7 +47,7 @@ $(document).ready(function () {
 	    "data": {"blogId": blogId, "comment": comment},
 	    "success": function (data) {
        		//update the DOM and hide the comment
-		$(".add-comment").hide()			   
+		$("#post-comment-" + blogId + " p").hide()			   
 	    }
 	})
     }
@@ -68,11 +68,4 @@ $(document).ready(function () {
 	var blogId = this.id.split("-")[2];
 	$("#blog-commenting-" + blogId).toggle("fast");
     })
-
-    $(".post-button").click(function (ev) {
-	//var blogId = parseInt(this.id.split("-")[2]),	    
-	//   var comment = $("#post-comment" + blogId).val();
-	//addComment(blogId, comment);
-    })
-
 });
