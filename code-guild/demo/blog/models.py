@@ -28,7 +28,12 @@ class BlogPost(models.Model):
     
 class Comment(models.Model):
     blog = models.ForeignKey("BlogPost")
+    created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=250)
     body = models.CharField(max_length=500)
 
     def __unicode__(self):
 	return "blog = {0} / comment = {1}".format(self.blog, self.body)
+
+    class Meta:
+	ordering = ["-created"]

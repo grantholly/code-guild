@@ -47,7 +47,9 @@ $(document).ready(function () {
 	    "data": {"blogId": blogId, "comment": comment},
 	    "success": function (data) {
        		//update the DOM and hide the comment
-		$("#post-comment-" + blogId + " p").hide()			   
+		$("#post-comment-" + blogId + " p").hide()
+		$("#get-comments-" + blogId + " p").hide()
+		$("#blog-commenting-" + blogId).hide()			   
 	    }
 	})
     }

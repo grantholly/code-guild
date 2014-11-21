@@ -41,3 +41,11 @@ def add_comment(request):
 	new_comment.save()
 	data.update({"comment": new_comment.body, "blogId": blog.id, "commentId": new_comment.id})
 	return HttpResponse(json.dumps(data), content_type="application/json")
+
+def get_comments(request):
+    if request.is_ajax() and request.method == "GET":
+	data = {}
+	blog = BlogPost.objects.get(pk=request.GET("blogId"))
+	comments = Comment.objects.get(blog=blog.id) 
+	data.update({"comments": comments})
+	return HttpResponse(json.dumps(data), content_type="application/json")
