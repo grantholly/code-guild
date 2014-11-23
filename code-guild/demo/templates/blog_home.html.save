@@ -17,19 +17,16 @@
         <div class="post-body">
           {{ blog.body|markdown }}
         </div>
-        <div class="comments" data-slug={{ blog.slug }}>
-          <a href="" id="post-comment-{{ blog.id }}" class="add-comment"><p>comment</p></a>
-          <a href="" id="get-comments-{{ blog.id }}" class="get-comments"><p>read the drivel</p></a>
+        <div class="commenting" data-slug={{ blog.slug }}>
+          <a href="/post_comment/" id="post-comment-{{ blog.id }}" class="add-comment"><p>comment</p></a>
+          <a href="/get_comments/" id="get-comments-{{ blog.id }}" class="get-comments"><p>read the drivel</p></a>
           <div id="blog-commenting-{{ blog.id }}" class="comment-active-area">
 	    <form action="" method="POST">
-	      <textarea id="comment-text-{{ blog.id }}" class="form-control" placeholder="be a supreme jerk" rows="4"></textarea>
+	      <textarea id="commenting-text-{{ blog.id }}" class="form-control" placeholder="be a supreme jerk" rows="4"></textarea>
 	      <button type="submit" id="submit-comment-{{ blog.id }}" class="btn btn-primary btn-xs post-button">Take that!</button>
-	    </form>
-          </div>
- 	  <div id="blog-{{ blog.id }}-comments" class="comments-thread">
-  	    <p>testing ajax</p>  
+	  </form>
 	  </div>
-	</div>
+        </div>
     </div>
   {% endfor %}
 

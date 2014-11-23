@@ -29,6 +29,7 @@ $(document).ready(function () {
         }
     });
 
+    //AJAX GET request comment handler
     function getComments (blogId) {
 	$.ajax({
 	    "method": "GET",
@@ -38,8 +39,9 @@ $(document).ready(function () {
 		//update the DOM with related comments
 	    }
 	})
-    }
+    };
 
+    //AJAX POST request comment handler
     function addComment (blogId, comment) {
 	$.ajax({
 	    "method": "POST",
@@ -47,27 +49,39 @@ $(document).ready(function () {
 	    "data": {"blogId": blogId, "comment": comment},
 	    "success": function (data) {
        		//update the DOM and hide the comment
-		$("#post-comment-" + blogId + " p").hide()
-		$("#get-comments-" + blogId + " p").hide()
-		$("#blog-commenting-" + blogId).hide()			   
+		$("#post-comment-" + blogId + " p").hide();
+		$("#get-comments-" + blogId + " p").hide();
+		$("#blog-commenting-" + blogId).toggle("fast");			   
 	    }
 	})
-    }
+    };
 
+    //disable href on commenting links
     $(".comments a").click(function (ev) {
 	ev.preventDefault();
-    })
+    });
 
+    //disable sumbit and make AJAX POST request for the textarea  
     $(".post-button").click(function (ev) {
 	ev.preventDefault();
 	var blogId = parseInt(this.id.split("-")[2]),
+	    //get the textarea value
 	    comment = $("#comment-text-" + blogId).val();
 	    console.log(comment);
+	//POST the comment
 	return addComment(blogId, comment);
-    })
+    });
 
+    //open commenting area 
     $(".add-comment").click(function () {
 	var blogId = this.id.split("-")[2];
 	$("#blog-commenting-" + blogId).toggle("fast");
-    })
+    });
+
+    //get comments
+    $(".get-comments").click(function () {
+        var blogId = this.id.split("-")[2];
+	//send AJAX GET request for comments
+        getComments(blogId);
+    });
 });

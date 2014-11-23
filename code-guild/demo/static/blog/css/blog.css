@@ -16,6 +16,10 @@
     display: none;
 }
 
+.comments-thread {
+    display: none;
+}
+
 /*voting*/
 
 .voting {

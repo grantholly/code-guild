@@ -2,6 +2,7 @@ import json
 
 from django.views import generic
 from django.http import HttpResponse, Http404
+from django.core.serializers import serialize
 
 from .models import BlogPost, Comment
 
@@ -44,8 +45,6 @@ def add_comment(request):
 
 def get_comments(request):
     if request.is_ajax() and request.method == "GET":
-	data = {}
-	blog = BlogPost.objects.get(pk=request.GET("blogId"))
-	comments = Comment.objects.get(blog=blog.id) 
-	data.update({"comments": comments})
-	return HttpResponse(json.dumps(data), content_type="application/json")
+	blog = BlogPost.objects.get(pk=request.GET.get("blogId", ""))
+	comments = serialize("json", Comment.objects.filter(blog=blog.id))
+	return HttpResponse(comments, content_type="application/json")

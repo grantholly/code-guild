@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     url(r'^blogs/$', include('blog.urls')),
     url(r'^blogs/vote/$', 'blog.views.vote', name='vote'),
     url(r'^blogs/add_comment/$', 'blog.views.add_comment', name='add_comment'),
+    url(r'^blogs/get_comments/$', 'blog.views.get_comments', name='get_comments'),
 
     # admin urls
     url(r'^admin/', include(admin.site.urls)),
