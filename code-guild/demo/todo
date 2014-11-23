@@ -1,7 +1,5 @@
-- apply blog css
-    - bold the votes for posts that you voted on
 - move all app specific script and link tags into a block and plug block into base
 - name space ajax request urls
-- results not updating correctly after first blog post
 - link logins to voting maybe?
+- handle AJAX GET request for comments to draw them in the DOM
 
