@@ -20,6 +20,16 @@
     display: none;
 }
 
+.comment-body {
+    background-color: rgb(217, 217, 217);
+    border-radius: 4px;
+    padding: 1em;
+}
+
+.comment-created {
+    font: 75% sans-serif;
+}
+
 /*voting*/
 
 .voting {
