@@ -16,10 +16,10 @@ urlpatterns = patterns('',
     url(r'^register_success/$', 'demo.views.register_success', name='register_success'),
     
     # signup urls
-    url(r'^$', include('signups.urls')),
+    url(r'^$', include('signups.urls', namespace='signups', app_name='signups')),
 
     # blog urls
-    url(r'^blogs/', include('blog.urls')),
+    url(r'^blogs/', include('blog.urls', namespace='blog', app_name='blog')),
 
     # admin urls
     url(r'^admin/', include(admin.site.urls)),

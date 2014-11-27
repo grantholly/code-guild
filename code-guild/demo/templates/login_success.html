@@ -3,6 +3,6 @@
 {% block content %}
 
   <h1>Hi, {{ first_name|capfirst }}</h1>
-  <p>click <a href="/logout/">here</a> to logout</p>
+  <p>click <a href="{% url 'logout' %}">here</a> to logout</p>
 
 {% endblock %}
