@@ -1,5 +1,7 @@
 - move all app specific script and link tags into a block and plug block into base
-- name space ajax request urls
 - merge all blog js into one file
 - link logins to voting maybe?
-
+- other feature ideas:
+	- post / comment tagging
+	- search posts / comments
+	- user profiles
