@@ -41,3 +41,17 @@
     font-weight: bold;
 }
 
+/* search */
+
+.search-controls {
+    display: inline-block;
+    background-color: rgb(220, 220, 220);
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.search-button {
+    position: relative;
+    float: right;
+}

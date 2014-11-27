@@ -50,7 +50,9 @@ INSTALLED_APPS = (
     'signups',
     'crispy_forms',
     'blog',
-    'django_markdown',
+    'django_markdown', 
+    'search',
+    'tags',
 )
 
 MIDDLEWARE_CLASSES = (
