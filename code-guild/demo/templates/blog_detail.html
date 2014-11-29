@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block blog %}
+{% load django_markdown %}
+
+<div class="post" id="blog-{{ blog_post.id }}" data-slug={{ blog_post.slug }}>
+  <h1>{{ blog_post.title }}</h1>
+  <p class="post-date">{{ blog_post.created }}</p>
+  <div class="voting">
+    <img class="vote" id="blog-vote-up-{{ blog_post.id }}" data-vote="upvote" src="http://wscont1.apps.microsoft.com/winstore/1x/aa5b4c58-bc4c-4f62-b3a7-f1e315562a77/Icon.271701.png">
+    <p class="upvotes">updoges: <span id="blog-{{ blog_post.id }}-upvotes">{{ blog.upvotes }}</span></p>
+    <img class="vote" id="blog-vote-down-{{ blog_post.id }}" data-vote="downvote" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKmkrKEMSTnjUt9Dfp2ffM5LbzehUKxUrUgAygzmkO24DeMzzJ7w">
+    <p class="downvotes">downrushes: <span id="blog-{{ blog_post.id }}-downvotes">{{ blog.downvotes }}</span></p>
+  </div>
+  <div class="post-body">
+    {{ blog_post.body|markdown }}
+  </div>
+  <div class="comments" data-slug={{ blog_post.slug }}>
+    <a href="" id="post-comment-{{ blog_post.id }}" class="add-comment"><p>comment</p></a>
+    <a href="" id="get-comments-{{ blog_post.id }}" class="get-comments"><p>read the drivel</p></a>
+    <div id="blog-commenting-{{ blog_post.id }}" class="comment-active-area">
+      <form action="" method="POST">
+        <textarea id="comment-text-{{ blog_post.id }}" class="form-control" placeholder="be a supreme jerk" rows="4"></textarea>
+        <button type="submit" id="submit-comment-{{ blog_post.id }}" class="btn btn-primary btn-xs post-button">Take that!</button>
+      </form>
+    </div>
+    <div id="blog-{{ blog_post.id }}-comments" class="comments-thread">
+    </div>
+  </div>
+</div>
+
+{% endblock %}

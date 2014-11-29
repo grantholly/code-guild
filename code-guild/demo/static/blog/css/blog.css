@@ -36,6 +36,10 @@
     margin-bottom: 1em;
 }
 
+.voting img {
+    cursor: pointer;
+}
+
 .voting p, img {
     display: inline-block;
     font-weight: bold;

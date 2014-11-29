@@ -1,19 +1,21 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
+from . import views
+
 admin.autodiscover()
 urlpatterns = patterns('',
 
     # authentication urls
-    url(r'^login/$', 'demo.views.login', name='login'),
-    url(r'^authenticate/$', 'demo.views.authenticate', name='authenticate'),
-    url(r'^logout/$', 'demo.views.logout', name='logout'),
-    url(r'^login_success/$', 'demo.views.login_success', name='login_success'),
-    url(r'^invalid/$', 'demo.views.invalid', name='invalid'),
+    url(r'^login/$', views.login, name='login'),
+    url(r'^authenticate/$', views.authenticate, name='authenticate'),
+    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^login_success/$', views.login_success, name='login_success'),
+    url(r'^invalid/$', views.invalid, name='invalid'),
 
     # registration urls
-    url(r'^register/$', 'demo.views.register', name='register'),
-    url(r'^register_success/$', 'demo.views.register_success', name='register_success'),
+    url(r'^register/$', views.register, name='register'),
+    url(r'^register_success/$', views.register_success, name='register_success'),
     
     # signup urls
     url(r'^$', include('signups.urls', namespace='signups', app_name='signups')),

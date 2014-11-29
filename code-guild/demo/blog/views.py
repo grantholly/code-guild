@@ -1,16 +1,23 @@
 import json
 
-from django.views import generic
+from django.views.generic import ListView, DetailView
 from django.http import HttpResponse, Http404
+from django.shortcuts import get_object_or_404, render_to_response
 from django.core.serializers import serialize
 
 from .models import BlogPost, Comment
 
 
-class BlogIndex(generic.ListView):
+class BlogIndex(ListView):
     queryset = BlogPost.objects.published()
     template_name = "blog_home.html"
     context_object_name = "blog_posts"
+
+
+def blog_post_detail(request, *args, **kwargs):
+    blog_post = get_object_or_404(BlogPost, pk=kwargs.get("pk"))
+    response = {"blog_post": blog_post}
+    return render_to_response('blog_detail.html', response)
 
 
 def vote(request):
