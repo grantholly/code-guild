@@ -6,3 +6,4 @@
 	- search posts / comments
 	- user profiles
 - paginate blog posts
+- make urls for blogposts blogs/id/slug/
