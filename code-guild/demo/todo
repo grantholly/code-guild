@@ -6,3 +6,4 @@
 	- search posts / comments
 	- user profiles
 - paginate blog posts
+	- create AJAX handler for more blogs

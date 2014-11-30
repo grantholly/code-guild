@@ -10,6 +10,7 @@ from .models import BlogPost, Comment
 
 class BlogIndex(ListView):
     queryset = BlogPost.objects.published()
+    paginate_by = 2
     template_name = "blog_home.html"
     context_object_name = "blog_posts"
 
@@ -62,6 +63,13 @@ def get_comments(request):
 
 def search(request):
     query = request.GET.get("query", "")
-    # todo - check for query in post body and/or comment body
+    # todo - check for query in post body, comment body, or by tag
     results = BlogPost.objects.filter(body__contains=query)
     return HttpResponse(results, content_type="application/json")
+
+
+def get_blogs(request):
+    # if request.is_ajax() and request.method == "GET":
+    #	last_blog = request.GET.get("createdDate", "")
+    #	next_blogs = BlogPost.objects.filter()
+    pass

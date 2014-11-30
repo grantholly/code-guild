@@ -34,10 +34,10 @@ $(document).ready(function () {
     //AJAX POST request handler
     function Vote (blogId, vote) {
 	$.ajax({
-	    type: "POST",
-	    url: "vote/",
-	    data: {"blogId": blogId, "vote": vote},
-	    success: function (data) {
+	    "method": "POST",
+	    "url": "vote/",
+	    "data": {"blogId": blogId, "vote": vote},
+	    "success": function (data) {
 		//hide the voting controls
 		$("#blog-vote-up-" + blogId).hide();
 		$("#blog-vote-down-" + blogId).hide();
@@ -66,5 +66,16 @@ $(document).ready(function () {
 	    return Vote(blogId, "down");
 	}
     })
-    
+    //handle click for more blog posts
+    $("a.get-more-posts").click(function (ev) {
+	ev.preventDefault();
+	//get the oldest created date of the current blogs
+	var $blogs = $("div.post"),
+	    oldestBlog = $blogs[$blogs.length - 1].childNodes[5].innerHTML;
+	//need to parse date to django compatable UTC format
+	//Date.toISOString() might work in JS
+	//or use datetime Python library
+	console.log(oldestBlog);
+    })
+ 
 });
