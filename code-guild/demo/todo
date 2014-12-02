@@ -7,3 +7,6 @@
 	- user profiles
 - paginate blog posts
 	- create AJAX handler for more blogs
+
+- datetime ideas
+	- strfdate / strpdate (Python)
