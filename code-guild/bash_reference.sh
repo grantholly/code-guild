@@ -15,6 +15,7 @@ cp - copy a file or folder from one place to another
 rm - remove a file or folder
 	rm ~/my_text
 	- with great power comes great responsibility!
+ln - create a shortcut to a file or folder
 
 text editors-----
 less
@@ -44,6 +45,7 @@ samurai level bash-----
 grep - pattern matching often combined with other commands
 sed - stream editor allowing you to make changes to a file by pattern
 awk - a mini programming language to manipulate text
+regex - a pattern description mini programming language
 
 redirection-----
 > - send the output of the left side to the file on the right
@@ -88,6 +90,13 @@ tar - create or extract archive files containing many files
 gpg - encrypt and decrypt files
 	- gpg -c my_text.txt (encrypt)
 	- gpg my_text.txt.gpg (decrypt)
+
+shells-----
+sh/bash - launches a shell or used to execute bash script files
+ssh - create a encrypted remote shell session on another machine
+	- ssh grant@myserver.net
+scp - copies files to remote machines with encryption
+ftp - copies files to remote machines without any encryption (clear text)
 
 other helpful stuff-----
 diff - show the differences between 2 files
