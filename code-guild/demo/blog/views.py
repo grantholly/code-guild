@@ -69,7 +69,7 @@ def search(request):
 
 
 def get_blogs(request):
-    # if request.is_ajax() and request.method == "GET":
-    #	last_blog = request.GET.get("createdDate", "")
-    #	next_blogs = BlogPost.objects.filter()
-    pass
+    if request.is_ajax() and request.method == "GET":
+	last_blog = request.GET.get("lastBlog", "")
+	blogs = BlogPost.objects.filter(created__lte = last_blog)
+    return HttpResponse(json.dumps(blogs), content_type="application/json")
