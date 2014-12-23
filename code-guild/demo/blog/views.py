@@ -1,4 +1,5 @@
 import json
+import datetime
 
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponse, Http404
@@ -71,5 +72,9 @@ def search(request):
 def get_blogs(request):
     if request.is_ajax() and request.method == "GET":
 	last_blog = request.GET.get("lastBlog", "")
+	datetime.datetime.strptime(last_blog, "%Y%m%dT%H%M%S%f%z")
 	blogs = BlogPost.objects.filter(created__lte = last_blog)
+    print("the server is returning {0}".format(blogs))
+    print("last blog on page is {0}".format(last_blog))
+    print(type(last_blog))
     return HttpResponse(json.dumps(blogs), content_type="application/json")

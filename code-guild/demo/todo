@@ -10,3 +10,6 @@
 
 - datetime ideas
 	- strfdate / strpdate (Python)
+	- UNIX timestamp
+	- cache the last query results, then
+	send the next based on previous query
