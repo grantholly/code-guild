@@ -72,9 +72,9 @@ def search(request):
 def get_blogs(request):
     if request.is_ajax() and request.method == "GET":
 	last_blog = request.GET.get("lastBlog", "")
-	datetime.datetime.strptime(last_blog, "%Y%m%dT%H%M%S%f%z")
+	"""incoming format = "Thursday, 04:40 AM nov 06, 2014"
+	date must match 2014-11-06T04:40:49.984795+0000 """
+	last_blog = datetime.datetime.strptime(last_blog, "%A, %I:%M %p %b %d, %Y")
+	print(last_blog)
 	blogs = BlogPost.objects.filter(created__lte = last_blog)
-    print("the server is returning {0}".format(blogs))
-    print("last blog on page is {0}".format(last_blog))
-    print(type(last_blog))
     return HttpResponse(json.dumps(blogs), content_type="application/json")

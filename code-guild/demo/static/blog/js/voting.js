@@ -87,7 +87,7 @@ $(document).ready(function () {
 	//get the oldest created date of the current blogs
 	var $blogs = $("div.post"),
 	    //get the data-ISOdate attribute value
-	    oldestBlog = $blogs[$blogs.length - 1].childNodes[5].getAttribute("data-ISOdate");
+	    oldestBlog = $blogs[$blogs.length - 1].childNodes[5].innerHTML;
 	console.log(oldestBlog);
 	getMoreBlogs(oldestBlog);
     })
