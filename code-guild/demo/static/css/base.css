@@ -1,0 +1,15 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.jumbotron {
+  background-color: #17d1ff;
+}
+
+/*ron*/
+.ron-wrapper img {
+    width: 100%;
+    height: auto;
+    display: none;
+}

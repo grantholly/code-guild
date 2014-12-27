@@ -1,3 +1,9 @@
+/*ron*/
+.ron-wrapper img {
+    width: 100%;
+    height: auto;
+}
+
 /*paging*/
 .paging {
     text-align: center;

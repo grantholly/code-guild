@@ -16,7 +16,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
 
-    <link rel="stylesheet" href="{% static "css/jumbotron.css" %}">
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
     <link rel="stylesheet" href="{% static "blog/css/blog.css"%}">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -51,7 +51,10 @@
 
     <div class="jumbotron">
       <div class="container">
-        <h1>It's happening!!!</h1>
+        <h1 id="dont-click-this">Let's do Django</h1>
+	<div class="ron-wrapper">
+	  <img src="http://www.reactiongifs.com/wp-content/uploads/2013/12/aVOSkIC.gif"></img>
+	</div>
 	{% block content %}
         {% endblock content %}
 	{% block profile %}
@@ -81,6 +84,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="{% static "js/base.js" %}"></script>
     <script src="{% static "blog/js/voting.js" %}"></script>
     <script src="{% static "blog/js/comments.js" %}"></script>
     <script src="{% static "blog/js/search.js" %}"></script>

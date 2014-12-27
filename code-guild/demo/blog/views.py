@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404, render_to_response
 from django.core.serializers import serialize
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from .models import BlogPost, Comment
 
@@ -69,12 +70,12 @@ def search(request):
     return HttpResponse(results, content_type="application/json")
 
 
+@ensure_csrf_cookie
 def get_blogs(request):
     if request.is_ajax() and request.method == "GET":
 	last_blog = request.GET.get("lastBlog", "")
 	"""incoming format = "Thursday, 04:40 AM nov 06, 2014"
 	date must match 2014-11-06T04:40:49.984795+0000 """
 	last_blog = datetime.datetime.strptime(last_blog, "%A, %I:%M %p %b %d, %Y")
-	print(last_blog)
-	blogs = BlogPost.objects.filter(created__lte = last_blog)
-    return HttpResponse(json.dumps(blogs), content_type="application/json")
+	blogs = serialize("json", BlogPost.objects.filter(created__lte = last_blog)[:2])
+        return HttpResponse(blogs, content_type="application/json")

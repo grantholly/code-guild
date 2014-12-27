@@ -38,12 +38,28 @@ $(document).ready(function () {
 	    "url": "get_blogs/",
 	    "data": {"lastBlog": lastBlog},
 	    "success": function (data) {
-		console.log(data);
+	        var i = 0,
+	            $blogTemplate = $("div.post:first"),
+	            blogClone,
+		    blogCloneChildren;
+	
+		console.log($blogTemplate);
+		//make a out-of-dom copy to manipulate
+		blogClone = $($blogTemplate).clone(true);
+		blogCloneChildren = $(blogClone).children();
+		for (i; i < 1; i++) {
+		    $(blogClone).attr({
+			"id": "blog-" + data[i].pk,
+			"data-slug": data[i].fields.slug
+			});
+		    $(blogCloneChildren[1]).html(data[i].fields.title);
+		    $("#blog-wrapper").append($(blogClone));
+		}
 	    }
 	})
     };
 
-    //AJAX POST request handler
+    //AJAX POST request handler for voting
     function Vote (blogId, vote) {
 	$.ajax({
 	    "method": "POST",
@@ -66,9 +82,6 @@ $(document).ready(function () {
 	return false;
     }
 
-    //'Nov. 6, 2014, 4:40 a.m.'
-    //YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] format."] required format for ajax
-
     //handle upvoting and downvoting
     $("img.vote").click(function () {
 	var blogId = parseInt(this.id.split("-")[3]);
@@ -88,7 +101,6 @@ $(document).ready(function () {
 	var $blogs = $("div.post"),
 	    //get the data-ISOdate attribute value
 	    oldestBlog = $blogs[$blogs.length - 1].childNodes[5].innerHTML;
-	console.log(oldestBlog);
 	getMoreBlogs(oldestBlog);
     })
  

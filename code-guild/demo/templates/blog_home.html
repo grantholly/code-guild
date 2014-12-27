@@ -2,7 +2,7 @@
 {% load django_markdown %}
 
 {% block blog %}
-
+  <div id="blog-wrapper">
   {% for blog in blog_posts %}
     <div class="post" id="blog-{{ blog.id }}" data-slug={{ blog.slug }}>
       {% csrf_token %}
@@ -18,9 +18,8 @@
           {{ blog.body|markdown|truncatewords:25 }}
         </div>
     </div>
-
   {% endfor %}
-
+  </div>
     <div class="paging">
       <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
     </div>

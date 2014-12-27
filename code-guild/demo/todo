@@ -6,9 +6,12 @@
 	- search posts / comments
 	- user profiles
 - paginate blog posts
-	- create AJAX handler for more blogs
-	- write callback function to put returned blogs into DOM
-
-- serialize the blogposts into JSON in blog/views.get_blogs
+	- Pages were loading and appending posts correctly to the DOM with their event
+	listeners, but I cannot easily use the template engine to further process the 
+	returned data.  This means that the body markdown and times would have to be 
+	(again) parsed, but this time in JS.  As it stands, I have decided not use AJAX 
+	for further development of this feature.
+	- I will use regular page loads and stick with Django's built in paginator
+	
 
 
