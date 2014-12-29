@@ -31,34 +31,6 @@ $(document).ready(function () {
         }
     });    
 
-    //AJAX GET request handler for more blog posts
-    function getMoreBlogs(lastBlog) {
-	$.ajax({
-	    "method": "GET",
-	    "url": "get_blogs/",
-	    "data": {"lastBlog": lastBlog},
-	    "success": function (data) {
-	        var i = 0,
-	            $blogTemplate = $("div.post:first"),
-	            blogClone,
-		    blogCloneChildren;
-	
-		console.log($blogTemplate);
-		//make a out-of-dom copy to manipulate
-		blogClone = $($blogTemplate).clone(true);
-		blogCloneChildren = $(blogClone).children();
-		for (i; i < 1; i++) {
-		    $(blogClone).attr({
-			"id": "blog-" + data[i].pk,
-			"data-slug": data[i].fields.slug
-			});
-		    $(blogCloneChildren[1]).html(data[i].fields.title);
-		    $("#blog-wrapper").append($(blogClone));
-		}
-	    }
-	})
-    };
-
     //AJAX POST request handler for voting
     function Vote (blogId, vote) {
 	$.ajax({
@@ -93,15 +65,6 @@ $(document).ready(function () {
 	    //send downvote to AJAX handler
 	    return Vote(blogId, "down");
 	}
-    })
-    //handle click for more blog posts
-    $("a.get-more-posts").click(function (ev) {
-	ev.preventDefault();
-	//get the oldest created date of the current blogs
-	var $blogs = $("div.post"),
-	    //get the data-ISOdate attribute value
-	    oldestBlog = $blogs[$blogs.length - 1].childNodes[5].innerHTML;
-	getMoreBlogs(oldestBlog);
     })
  
 });

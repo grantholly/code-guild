@@ -12,7 +12,6 @@ from .models import BlogPost, Comment
 
 class BlogIndex(ListView):
     queryset = BlogPost.objects.published()
-    paginate_by = 2
     template_name = "blog_home.html"
     context_object_name = "blog_posts"
 
