@@ -20,13 +20,5 @@
     </div>
   {% endfor %}
   </div>
-    <div class="paging">
-      <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
-    </div>
-      <ul class="pager">
-        {% if page_obj.has_next %}
-	<li><a class="get-more-posts" href="">More</a></li>
-	{% endif %}
-      </ul>
 
 {% endblock %}
