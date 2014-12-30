@@ -3,17 +3,19 @@ import datetime
 
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponse, Http404
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response, RequestContext
 from django.core.serializers import serialize
-from django.views.decorators.csrf import ensure_csrf_cookie
 
+from endless_pagination.decorators import page_template
 from .models import BlogPost, Comment
 
 
-class BlogIndex(ListView):
-    queryset = BlogPost.objects.published()
-    template_name = "blog_home.html"
-    context_object_name = "blog_posts"
+@page_template("blog_post_template.html")
+def blog_index(request, template="blog_home.html", extra_context=None):
+    context = {"blog_posts": BlogPost.objects.all()}
+    if extra_context is not None:
+	context.update(extra_context)
+    return render_to_response(template, context, context_instance=RequestContext(request))
 
 
 def blog_post_detail(request, *args, **kwargs):
@@ -69,12 +71,3 @@ def search(request):
     return HttpResponse(results, content_type="application/json")
 
 
-@ensure_csrf_cookie
-def get_blogs(request):
-    if request.is_ajax() and request.method == "GET":
-	last_blog = request.GET.get("lastBlog", "")
-	"""incoming format = "Thursday, 04:40 AM nov 06, 2014"
-	date must match 2014-11-06T04:40:49.984795+0000 """
-	last_blog = datetime.datetime.strptime(last_blog, "%A, %I:%M %p %b %d, %Y")
-	blogs = serialize("json", BlogPost.objects.filter(created__lte = last_blog)[:2])
-        return HttpResponse(blogs, content_type="application/json")

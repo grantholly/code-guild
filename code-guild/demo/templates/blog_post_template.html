@@ -1,0 +1,23 @@
+{% load django_markdown %}
+{% load endless %}
+
+  {% lazy_paginate 2 blog_posts %}
+  {% for blog in blog_posts %}
+    <div class="post" id="blog-{{ blog.id }}" data-slug={{ blog.slug }}>
+      {% csrf_token %}
+      <h1><a href={% url 'blog:detail' pk=blog.id slug=blog.slug %}>{{ blog.title }}</a></h1>
+      <p class="post-date">{{ blog.created|date:"l, h:i A b d, Y" }}</p>
+        <div class="voting">
+          <img class="vote" id="blog-vote-up-{{ blog.id }}" data-vote="upvote" src="http://wscont1.apps.microsoft.com/winstore/1x/aa5b4c58-bc4c-4f62-b3a7-f1e315562a77/Icon.271701.png"></img>
+          <p class="upvotes">updoges: <span id="blog-{{ blog.id }}-upvotes">{{ blog.upvotes }}</span></p>
+          <img class="vote" id="blog-vote-down-{{ blog.id }}" data-vote="downvote" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKmkrKEMSTnjUt9Dfp2ffM5LbzehUKxUrUgAygzmkO24DeMzzJ7w"></img>
+          <p class="downvotes">downrushes: <span id="blog-{{ blog.id }}-downvotes">{{ blog.downvotes }}</span></p>
+        </div>
+        <div class="post-body">
+          {{ blog.body|markdown|truncatewords:25 }}
+        </div>
+    </div>
+  {% endfor %}
+  {% show_more "scroll or click for more garbage" %}
+
+
