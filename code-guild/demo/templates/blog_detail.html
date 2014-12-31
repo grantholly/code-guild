@@ -4,7 +4,7 @@
 {% load staticfiles %}
 
 {% block stylesheet %}
-  <!-- put blog style sheet here -->
+  <link rel="stylesheet" href="{% static "blog/css/blog.css" %}">
 {% endblock stylesheet %}
 
 <div class="post" id="blog-{{ blog_post.id }}" data-slug={{ blog_post.slug }}>
@@ -36,5 +36,5 @@
 {% endblock %}
 
 {% block javascript %}
-  <!-- put comments.js here -->
+  <script src="{% static "blog/js/comments.js" %}"></script>
 {% endblock javascript %}

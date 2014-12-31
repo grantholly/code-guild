@@ -2,19 +2,21 @@
 {% load staticfiles %}
 
 {% block stylesheet %}
-  <!-- put blog style sheet here -->
+  <link rel="stylesheet" href="{% static "blog/css/blog.css"%}">
 {% endblock stylesheet %}
 
 {% block blog %}
   {% load django_markdown %}
   {% include page_template %}
+  </div>
+{% endblock %}
+
+{% block javascript %}
   {% block js %}
     {{ block.super }}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
     <script src="{{ STATIC_URL }}blog/js/voting.js"></script>
     <script src="{{ STATIC_URL }}blog/js/search.js"></script>
     <script>$.endlessPaginate({paginateOnScroll: true});</script>
   {% endblock js %}
-  </div>
-{% endblock %}
+{% endblock javascript %}
