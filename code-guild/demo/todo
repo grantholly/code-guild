@@ -1,14 +1,17 @@
 - move all app specific script and link tags into a block and plug block into base
 - merge all blog js into one file
-	- looking at using AMD with Require js to organize my js files
 - link logins to voting maybe?
 - other feature ideas:
 	- post / comment tagging
 	- search posts / comments
 	- user profiles
 - paginate blog posts
-	- now I'm using django endless pagination
-	- i need the newly paginated blogs to have their event listeners attached
-	  without double attaching to nodes that already have the necessary event listeners	
+	- Pages were loading and appending posts correctly to the DOM with their event
+	listeners, but I cannot easily use the template engine to further process the 
+	returned data.  This means that the body markdown and times would have to be 
+	(again) parsed, but this time in JS.  As it stands, I have decided not use AJAX 
+	for further development of this feature.
+	- I will use regular page loads and stick with Django's built in paginator
+	
 
 

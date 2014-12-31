@@ -55,7 +55,7 @@ $(document).ready(function () {
     }
 
     //handle upvoting and downvoting
-    $("img.vote").click(function () {
+    $("div.blog").on("click", "img.vote", function () {
 	var blogId = parseInt(this.id.split("-")[3]);
 	if (this.id.split("-")[2] === "up") {
 	    //send upvote to AJAX handler
