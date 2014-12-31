@@ -49,9 +49,6 @@ $(document).ready(function () {
             })
 	}
 	$comments.toggle("fast");
-	$("html, body").animate({
-            scrollTop: $(this).offset().top
-        }, 1000);
     };
 
     //AJAX POST request comment handler
@@ -100,5 +97,8 @@ $(document).ready(function () {
 	    $comments = $("#blog-" + blogId + "-comments");
 	//send AJAX GET request for comments
        	getComments(blogId, $comments);
+	$("html, body").animate({
+            scrollTop: $(this).offset().top
+        }, 1000);
     });
 });

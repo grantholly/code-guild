@@ -6,11 +6,16 @@
   {% include page_template %}
   {% block js %}
     {{ block.super }}
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
     <script src="{{ STATIC_URL }}blog/js/voting.js"></script>
     <script src="{{ STATIC_URL }}blog/js/search.js"></script>
-    <script>$.endlessPaginate();</script>
+    <script>$.endlessPaginate({
+		paginateOnScroll: true,
+		onCompleted: function () {
+		     console.log("paging");
+		     }
+		});</script>
   {% endblock js %}
   </div>
 {% endblock %}
