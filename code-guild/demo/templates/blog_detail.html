@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block blog %}
 {% load django_markdown %}
+{% load staticfiles %}
+
+{% block stylesheet %}
+  <!-- put blog style sheet here -->
+{% endblock stylesheet %}
 
 <div class="post" id="blog-{{ blog_post.id }}" data-slug={{ blog_post.slug }}>
   <h1>{{ blog_post.title }}</h1>
@@ -29,3 +34,7 @@
 </div>
 
 {% endblock %}
+
+{% block javascript %}
+  <!-- put comments.js here -->
+{% endblock javascript %}

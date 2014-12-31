@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
-<div id="blog-wrapper">
+{% block stylesheet %}
+  <!-- put blog style sheet here -->
+{% endblock stylesheet %}
+
 {% block blog %}
   {% load django_markdown %}
   {% include page_template %}
@@ -10,12 +14,7 @@
     <script src="{{ STATIC_URL }}endless_pagination/js/endless-pagination.js"></script>
     <script src="{{ STATIC_URL }}blog/js/voting.js"></script>
     <script src="{{ STATIC_URL }}blog/js/search.js"></script>
-    <script>$.endlessPaginate({
-		paginateOnScroll: true,
-		onCompleted: function () {
-		     console.log("paging");
-		     }
-		});</script>
+    <script>$.endlessPaginate({paginateOnScroll: true});</script>
   {% endblock js %}
   </div>
 {% endblock %}

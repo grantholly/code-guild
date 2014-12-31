@@ -1,17 +1,14 @@
 - move all app specific script and link tags into a block and plug block into base
+	- add stylesheet and js blocks in templates to load app specific js and css
 - merge all blog js into one file
 - link logins to voting maybe?
+- password reset through email code
+	- captcha for registration
 - other feature ideas:
 	- post / comment tagging
 	- search posts / comments
+		- save queries to db for reuse
 	- user profiles
-- paginate blog posts
-	- Pages were loading and appending posts correctly to the DOM with their event
-	listeners, but I cannot easily use the template engine to further process the 
-	returned data.  This means that the body markdown and times would have to be 
-	(again) parsed, but this time in JS.  As it stands, I have decided not use AJAX 
-	for further development of this feature.
-	- I will use regular page loads and stick with Django's built in paginator
-	
+		- show posts you've commented / voted on
 
 
