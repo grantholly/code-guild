@@ -10,5 +10,7 @@
 		- save queries to db for reuse
 	- user profiles
 		- show posts you've commented / voted on
-
+	- drag and drop file uploader
+		- show thumbnails
+		- allow for delete from server
 
