@@ -1,0 +1,13 @@
+.trash-uploader {
+    border: 10px dashed #ccc;
+    width: 300px;
+    min-height: 300px;
+    margin: 1em auto; 
+    color: #ccc;
+    line-height: 300px;
+    text-align: center;
+}
+
+.trash-tip {
+
+}

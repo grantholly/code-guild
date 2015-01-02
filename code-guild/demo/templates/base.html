@@ -12,9 +12,7 @@
     <title>Sign up for Django</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
-
     <link rel="stylesheet" href="{% static "css/base.css" %}">
     {% block stylesheet %}
     {% endblock stylesheet %}
@@ -38,6 +36,7 @@
           </button>
           <a class="navbar-brand" href="{% url 'signups:index' %}">Home</a>
 	  <a class="navbar-brand" href="{% url 'blog:index' %}">Blogs</a> 
+	  <a class="navbar-brand" href="{% url 'trash:index' %}">Trash</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
@@ -60,6 +59,15 @@
 	{% block profile %}
 	{% endblock profile %}
         <p>Django is a python powered web development framework</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+	<div class="trash col-sm-10">
+	  {% block trash %}
+	  {% endblock trash %}
+	</div>
       </div>
     </div>
 

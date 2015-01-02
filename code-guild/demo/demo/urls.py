@@ -23,6 +23,9 @@ urlpatterns = patterns('',
     # blog urls
     url(r'^blogs/', include('blog.urls', namespace='blog', app_name='blog')),
 
+    # trash urls
+    url(r'^trash/', include('trash.urls', namespace='trash', app_name='trash')),
+
     # admin urls
     url(r'^admin/', include(admin.site.urls)),
     url(r'^markdown/', include('django_markdown.urls')),

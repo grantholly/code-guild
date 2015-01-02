@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static "trash/css/trash.css" %}">
+{% endblock stylesheet %}
+
+{% block trash %}
+  <h1>Upload your files here</h1>
+  <p>we will delete them for you!</p>
+  <div class="trash-uploader" id="uploader">
+    <p class="trash-tip">drag and drop files in here to upload them</p>
+  </div>
+{% endblock trash %}
+
+{% block profile %}
+{% endblock profile %}
+
+{% block javascript %}
+{% endblock javascript %}

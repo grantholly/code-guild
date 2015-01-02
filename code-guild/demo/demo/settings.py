@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'search',
     'tags',
     'endless_pagination',
+    'trash',
 )
 
 MIDDLEWARE_CLASSES = (
