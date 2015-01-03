@@ -16,3 +16,11 @@
 	- animate dashed border on dragenter
 	
 - need to write callback handler for ajax response for drag and drop
+- need to serialize a JSON object after an upload to send back to the browser for thumbnails
+- thumbnails will be looked up by instance.get_absolute_url() and sent to template tags
+[[ base.html ]]
+  [[ block trash_home ]]
+    [[ block AJAX_response_template ]]
+
+
+

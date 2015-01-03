@@ -2,27 +2,50 @@ import json
 
 from django.shortcuts import render, render_to_response
 from django.views.generic import CreateView, DeleteView, ListView
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+from django.core.context_processors import csrf
+from django.core.files.uploadedfile import UploadedFile
 
 from .models import Document
 from .response import JSONResponse, response_mimetype
 from .serialize import serialize
 
 
-def trash_index(request):
-    return render_to_response('trash_home.html')
+def index(request):
+    token = {}
+    token.update(csrf(request))
+    return render_to_response("trash_home.html", token)
 
 
-class Upload(CreateView):
-    model = Document
+def upload(request):
+    """
+    key: u'files[]',
+    value: [<InMemoryUploadedFile: Eva-Green-Sin-City-a-Dame-to-Kill-For.jpg (image/jpeg)>]}>,
+        type: MultiValueDict
+        request.FILES[u"files"].__dict__:
 
-    def form_valid(self, form):
-	files = [serialize(form.save())]
-	data = {'files': files}
-	response = JSONResponse(data, mimetype=response_mimetype(self.request))
-	response["Content-Disposition"] = "inline; filename=files.json"
-	return response
+    {'file': <_io.BytesIO object at 0x7eff18698530>, 
+    'content_type_extra': {}, 
+    'charset': None, 
+    '_name': u'Eva-Green-Sin-City-a-Dame-to-Kill-For.jpg', 
+    'content_type': u'image/jpeg', 
+    '_size': 335411, 
+    'field_name': u'files[]'}
+    """
+    if request.method == "POST":
+	if request.FILES == None:
+	    return HttpResponse("<h1>No files sent!</h1>")
 
-    def form_valid(self, form):
-	data = json.dumps(form.errors)
-	return HttpResponse(content=data, status=400, content_type="application/json")
+	# todo - make this loop through and get all files and commit them in one transaction
+	file = UploadedFile(request.FILES[u"files[]"])
+	file_name = file.name
+	file_size = file.file.size
+	
+	upload = Document()
+	upload.title = str(file_name)
+	upload.document = file
+	upload.save()
+	print(upload)
+
+        return HttpResponse("<h1>You did it!</h1>")    
+
