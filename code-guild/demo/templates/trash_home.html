@@ -11,10 +11,12 @@
   <div class="trash-uploader" id="uploader">
     <p class="trash-tip">drag and drop files in here to upload them</p>
   </div>
+  <div class="trash-display"></div>
 {% endblock trash %}
 
 {% block profile %}
 {% endblock profile %}
 
 {% block javascript %}
+  <script src="{% static "trash/js/trash.js" %}"></script>
 {% endblock javascript %}

@@ -1,5 +1,6 @@
 Django==1.7.1
 Markdown==2.5.1
+Pillow==2.7.0
 argparse==1.2.1
 django-crispy-forms==1.4.0
 django-endless-pagination==2.0

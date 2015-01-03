@@ -10,7 +10,9 @@
 		- save queries to db for reuse
 	- user profiles
 		- show posts you've commented / voted on
-	- drag and drop file uploader
-		- show thumbnails
-		- allow for delete from server
-
+- drag and drop file uploader
+	- show thumbnails
+	- allow for delete from server
+	- animate dashed border on dragenter
+	
+- need to write callback handler for ajax response for drag and drop
