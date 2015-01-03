@@ -24,11 +24,11 @@ $(document).ready(function () {
 
     $.ajaxSetup({
 	beforeSend: function(xhr, settings) {
-	if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-	    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-	}
-    }
-});
+	    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+	        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	    }
+        }
+    });
 
     var dropDiv = document.getElementById("uploader"),
 	acceptedTypes = {
@@ -39,32 +39,36 @@ $(document).ready(function () {
 
     //AJAX POST request handler for dropped files
     function upload (files) {
+	console.log(files.length);
 	var formData = new FormData(),
 	    xhr = new XMLHttpRequest(),
 	    max = files.length,
 	    i;
 
-        //loop through the files array and add each file to formData
+        //loop through the files array and send each file individually
 	for (i = 0; i < max; i++) {
 	    //check for acepted picture file type
 	    if (acceptedTypes[files[i].type]) {
-		formData.append('files[]', files[i]);
+		formData.append("file_" + i, files[i]);
 	    }
-	}
+	}			
+        sendFile(formData);
 
-        xhr.open("post", "upload/");
-        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        console.log("request opened")
-        xhr.send(formData);
-        console.log("request sent")
-	xhr.onreadystatechange = function () {
-	    console.log(xhr.readyState, xhr.status)
-	    if ((xhr.readyState === 4) && (xhr.status === 200)) {
-		//callback function for handling the server response contained in data
-                xhr.onload = function (data) {
-		    console.log(data);
-                }
-	    }
+	function sendFile (file) {
+            xhr.open("post", "upload/");
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            console.log("request opened")
+            xhr.send(formData);
+            console.log("request sent")
+	    xhr.onreadystatechange = function () {
+	        console.log(xhr.readyState, xhr.status)
+	        if ((xhr.readyState === 4) && (xhr.status === 200)) {
+		    //callback function for handling the server response contained in data
+                    xhr.onload = function (data) {
+		        console.log(data);
+                    }
+	        }
+            }
         }
     }
 
@@ -76,9 +80,6 @@ $(document).ready(function () {
 	ev.stopPropagation();
 	//return to base css class after dropping
 	this.className = "trash-uploader";
-	for (i = 0; i < max; i++) {
-	    console.log(ev.dataTransfer.files[i]);
-	}
 	upload(ev.dataTransfer.files);
      }
 

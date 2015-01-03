@@ -8,9 +8,13 @@
 {% block trash %}
   <h1>Upload your ugly pictures here</h1>
   <p>we will delete them for you!</p>
-  <div class="trash-uploader" id="uploader">
-    <p class="trash-tip">drag and drop pictures in here to upload them</p>
-  </div>
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form }}
+    {% csrf_token %}
+    <div class="trash-uploader" id="uploader">
+      <p class="trash-tip">drag and drop pictures in here to upload them</p>
+    </div>
+  </form>
   <div class="trash-display">
     <table role="presentation" class="table table-striped">
       <tbody class="files">

@@ -19,7 +19,7 @@ def index(request):
 
 def upload(request):
     """
-    key: u'files[]',
+    key: u'file_', #like file_0 or file_1
     value: [<InMemoryUploadedFile: Eva-Green-Sin-City-a-Dame-to-Kill-For.jpg (image/jpeg)>]}>,
         type: MultiValueDict
         request.FILES[u"files"].__dict__:
@@ -32,20 +32,22 @@ def upload(request):
     '_size': 335411, 
     'field_name': u'files[]'}
     """
-    if request.method == "POST":
+    if request.method == "POST" and request.FILES:
 	if request.FILES == None:
 	    return HttpResponse("<h1>No files sent!</h1>")
 
 	# todo - make this loop through and get all files and commit them in one transaction
-	file = UploadedFile(request.FILES[u"files[]"])
-	file_name = file.name
-	file_size = file.file.size
+	for image in request.FILES:
+	    print(image, request.FILES[image].content_type)
 	
-	upload = Document()
-	upload.title = str(file_name)
-	upload.document = file
-	upload.save()
-	print(upload)
+	    #file = UploadedFile(request.FILES[u"files[]"])
+	    #file_name = file.name
+	    #file_size = file.file.size
+	
+	    #upload = Document()
+	    #upload.title = str(file_name)
+	    #upload.document = file
+	    #upload.save()
+	    #print(upload)
 
-        return HttpResponse("<h1>You did it!</h1>")    
-
+        return HttpResponse("<h1>You did it!</h1>")
