@@ -5,6 +5,7 @@
   {% for blog in blog_posts %}
     <div class="post" id="blog-{{ blog.id }}" data-slug={{ blog.slug }}>
       {% csrf_token %}
+      <!-- change the href here to use blog.get_abasolute_url -->
       <h1><a href={{ blog.id }}/{{ blog.slug }}>{{ blog.title }}</a></h1>
       <p class="post-date">{{ blog.created|date:"l, h:i A b d, Y" }}</p>
         <div class="voting">

@@ -36,18 +36,23 @@ def upload(request):
 	if request.FILES == None:
 	    return HttpResponse("<h1>No files sent!</h1>")
 
-	# todo - make this loop through and get all files and commit them in one transaction
+	new_files = []
 	for image in request.FILES:
-	    print(image, request.FILES[image].content_type)
+	    #pulling files out of request and putting them into UploadedFile instances
+	    file = UploadedFile(request.FILES[image])
+	    file_name = request.FILES[image]._name
+	    file_size = request.FILES[image]._size
+	    
+            #putting uploaded files into our DB
+	    upload = Document()
+	    upload.file_name = str(file_name)
+	    upload.document = file
+	    upload.size = file_size
+	    upload.file_type = upload.get_file_type()
+	    new_files.append(upload)
 	
-	    #file = UploadedFile(request.FILES[u"files[]"])
-	    #file_name = file.name
-	    #file_size = file.file.size
-	
-	    #upload = Document()
-	    #upload.title = str(file_name)
-	    #upload.document = file
-	    #upload.save()
-	    #print(upload)
+	#create all files in one DB transaction from a list of Document instances
+	Document.objects.bulk_create(new_files)
 
+	# todo return a serialized JSON of the files to the browser for thumbnails
         return HttpResponse("<h1>You did it!</h1>")
