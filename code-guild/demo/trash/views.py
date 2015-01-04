@@ -8,7 +8,7 @@ from django.core.files.uploadedfile import UploadedFile
 
 from .models import Document
 from .response import JSONResponse, response_mimetype
-from .serialize import serialize
+from .serialize import order_name
 
 
 def index(request):
@@ -37,7 +37,10 @@ def upload(request):
 	    return HttpResponse("<h1>No files sent!</h1>")
 
 	new_files = []
+	json_response = []
+
 	for image in request.FILES:
+
 	    #pulling files out of request and putting them into UploadedFile instances
 	    file = UploadedFile(request.FILES[image])
 	    file_name = request.FILES[image]._name
@@ -49,10 +52,34 @@ def upload(request):
 	    upload.document = file
 	    upload.size = file_size
 	    upload.file_type = upload.get_file_type()
+
+	    #loading the response json object
+	    obj = {}
+	    obj["file"] = {
+			"name": None,
+			"longName": None,
+			"size": None,
+			"type": None,
+			"url": None,
+			}
+	    obj["file"]["name"] = order_name(upload.file_name)
+	    obj["file"]["longName"] = upload.file_name
+	    obj["file"]["size"] = upload.size
+	    obj["file"]["type"] = upload.file_type
+	    obj["file"]["url"] = upload.get_absolute_url()
+
+	    json_response.append(obj)
 	    new_files.append(upload)
-	
+	    
 	#create all files in one DB transaction from a list of Document instances
 	Document.objects.bulk_create(new_files)
+	response = JSONResponse(json_response, mimetype=response_mimetype(request))
+        return response
 
-	# todo return a serialized JSON of the files to the browser for thumbnails
-        return HttpResponse("<h1>You did it!</h1>")
+
+def edit(request):
+    pass
+
+
+def delete(request):
+    pass

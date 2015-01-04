@@ -39,7 +39,6 @@ $(document).ready(function () {
 
     //AJAX POST request handler for dropped files
     function upload (files) {
-	console.log(files.length);
 	var formData = new FormData(),
 	    xhr = new XMLHttpRequest(),
 	    max = files.length,
@@ -57,19 +56,36 @@ $(document).ready(function () {
 	function sendFile (file) {
             xhr.open("post", "upload/");
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            console.log("request opened")
             xhr.send(formData);
-            console.log("request sent")
 	    xhr.onreadystatechange = function () {
-	        console.log(xhr.readyState, xhr.status)
 	        if ((xhr.readyState === 4) && (xhr.status === 200)) {
 		    //callback function for handling the server response contained in data
-                    xhr.onload = function (data) {
-		        console.log(data);
-                    }
+                    xhr.onload = showThumbnails (xhr.response) 
 	        }
             }
         }
+    }
+
+    //AJAX callback handler	
+    function showThumbnails (data) {
+	console.log("callback ran");
+	var display = document.getElementById("display"),
+	    response = JSON.parse(data),
+	    img = document.createElement("img"),
+	    max = response.length,
+	    i;
+	
+	console.log(response)
+	for (i = 0; i < max; i++) {
+	    /*
+		I think I need and IIFE here to make sure
+		that each pass through the loop that I have
+		a new instance of img to append to display
+	    */
+	    //console.log(response[i].file.url);
+	    img.setAttribute("src", response[i].file.url)
+	    display.appendChild(img);
+	}	
     }
 
     dropDiv.ondrop = function (ev) {

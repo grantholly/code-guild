@@ -6,5 +6,7 @@ from . import views
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'upload/$', views.upload, name='upload'),
+    url(r'edit/$', views.edit, name='edit'),
+    url(r'delete/$', views.delete, name='delete'),
 )
 

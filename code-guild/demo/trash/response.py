@@ -1,4 +1,4 @@
-import json as simplejson
+import json
 
 from django.http import HttpResponse
 
@@ -34,5 +34,5 @@ class JSONResponse(HttpResponse):
     """
     def __init__(self, obj='', json_opts=None, mimetype=MIMEJSON, *args, **kwargs):
         json_opts = json_opts if isinstance(json_opts, dict) else {}
-        content = simplejson.dumps(obj, **json_opts)
+        content = json.dumps(obj, **json_opts)
         super(JSONResponse, self).__init__(content, mimetype, *args, **kwargs)
