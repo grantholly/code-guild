@@ -8,7 +8,6 @@ from django.core.files.uploadedfile import UploadedFile
 
 from .models import Document
 from .response import JSONResponse, response_mimetype
-from .serialize import order_name
 
 
 def index(request):
@@ -57,15 +56,11 @@ def upload(request):
 	    obj = {}
 	    obj["file"] = {
 			"name": None,
-			"longName": None,
 			"size": None,
-			"type": None,
 			"url": None,
 			}
-	    obj["file"]["name"] = order_name(upload.file_name)
-	    obj["file"]["longName"] = upload.file_name
+	    obj["file"]["name"] = upload.file_name
 	    obj["file"]["size"] = upload.size
-	    obj["file"]["type"] = upload.file_type
 	    obj["file"]["url"] = upload.get_absolute_url()
 
 	    json_response.append(obj)

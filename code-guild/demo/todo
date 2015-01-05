@@ -14,6 +14,7 @@
 	- show thumbnails
 	- allow for delete from server
 	- animate dashed border on dragenter
+	- drag and drop to re-arrange
 
 - captions and user created titles for images	
 - need to write callback handler for ajax response for drag and drop

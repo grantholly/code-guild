@@ -22,5 +22,14 @@
     margin-right: 1em;
     margin-bottom: 1em;
     overflow: hidden;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
 
+.trash-thumbnail:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.trash-preview-header {
+    text-align: center;
+    margin-bottom: 1em;
+}
