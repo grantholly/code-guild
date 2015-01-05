@@ -1,2 +1,2 @@
 *.pyc
-codeguild/codeguild/demo/media/**/*
+media/*

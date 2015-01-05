@@ -40,23 +40,39 @@ $(document).ready(function () {
 
     //modal builder
     function makeModal (url, title, size) {
-	var modalParent = document.getElementById("trash-modal-content"),
-	    img = document.createElement("img");
+	//list out child nodes of parent for assignment of title, size, image url
+
+	//console.log(url);
+	//console.log(title);
+	//console.log(size);
+
+	var modalBox = document.getElementById("trash-modal"),
+	    modalParent = document.getElementById("trash-modal-content"),
+            modalBody = document.getElementById("trash-modal-body"),
+	    modalImg = modalBody.childNodes[3],
+	    modalTitle = document.getElementById("trash-modal-title"),
+	    modalSize = document.getElementById("trash-modal-size");
 	
-	    img.src = url;
-	    modalParent.childNodes[3].appendChild(img);
+	console.log(modalImg);
+	modalImg.className = "trash-modal-display";
+	modalImg.src = url;
+	modalTitle.innerHTML = title;
+	modalSize.innerHTML = "size: " + size;
     }
 
     //add click handler to open modal
     display.onclick = function (ev) {
 	ev = ev || window.event;
 	var target = ev.target || ev.srcElement,
-	    modalBody = document.getElementById("trash-modal-body");
+	    modalBody = document.getElementById("trash-modal-body"),
+	    url,
+	    title,
+	    size;
 	
+	console.log(modalBody.children.length);
+
 	if (target.className === "trash-thumbnail") {
 	    var url = target.style.backgroundImage,	    
-		title,
-		size;
 			    
 	    //omfg double double quotes! die in a fucking fire.
 	    //really wish I was better with regex
@@ -69,11 +85,12 @@ $(document).ready(function () {
 
 	    console.log(target);
 
-	    if (modalBody.children.length === 0) {	    
+	    if (modalBody.children.length === 1) {	    
 		makeModal(url, title, size);
 	    }
 	}
     }
+
 
     //AJAX POST request handler for dropped files
     function upload (files) {

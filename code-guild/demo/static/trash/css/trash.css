@@ -33,3 +33,9 @@
     text-align: center;
     margin-bottom: 1em;
 }
+
+.trash-modal-display {
+    max-width: 100%;
+    max-height: 100%;
+}
+
