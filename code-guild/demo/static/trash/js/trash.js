@@ -31,6 +31,7 @@ $(document).ready(function () {
     });
 
     var dropDiv = document.getElementById("uploader"),
+        display = document.getElementById("display"),
 	acceptedTypes = {
 	    "image/jpeg": true,
 	    "image/png": true,
@@ -68,23 +69,18 @@ $(document).ready(function () {
 
     //AJAX callback handler	
     function showThumbnails (data) {
-	console.log("callback ran");
-	var display = document.getElementById("display"),
-	    response = JSON.parse(data),
-	    img = document.createElement("img"),
+	var response = JSON.parse(data),
+	    div = document.createElement("div"),
 	    max = response.length,
 	    i;
 	
-	console.log(response)
 	for (i = 0; i < max; i++) {
-	    /*
-		I think I need and IIFE here to make sure
-		that each pass through the loop that I have
-		a new instance of img to append to display
-	    */
-	    //console.log(response[i].file.url);
-	    img.setAttribute("src", response[i].file.url)
-	    display.appendChild(img);
+	    var div = document.createElement("div"),
+		backgroundImg = response[i].file.url;
+	    
+	    div.className = "trash-thumbnail";
+	    div.style.backgroundImage = "url(" + backgroundImg + ")";
+	    display.appendChild(div);
 	}	
     }
 
