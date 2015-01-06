@@ -1,3 +1,5 @@
+/* drag and drop */
+
 .trash-uploader {
     border: 10px dashed #ccc;
     width: 100%;
@@ -12,6 +14,8 @@
     border-color: #000;
     color: #000;
 }
+
+/* thumbnail display */
 
 .trash-thumbnail {
     display: inline-block;
@@ -34,8 +38,25 @@
     margin-bottom: 1em;
 }
 
+/* modal box */
+
 .trash-modal-display {
     max-width: 100%;
     max-height: 100%;
 }
+
+.trash-file-size {
+    display: inline-block;
+    float: left;
+    margin-left: 1em;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.trash-delete {
+    float: left;
+}
+
 

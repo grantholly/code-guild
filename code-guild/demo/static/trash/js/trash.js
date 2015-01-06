@@ -41,11 +41,6 @@ $(document).ready(function () {
     //modal builder
     function makeModal (url, title, size) {
 	//list out child nodes of parent for assignment of title, size, image url
-
-	//console.log(url);
-	//console.log(title);
-	//console.log(size);
-
 	var modalBox = document.getElementById("trash-modal"),
 	    modalParent = document.getElementById("trash-modal-content"),
             modalBody = document.getElementById("trash-modal-body"),
@@ -53,7 +48,6 @@ $(document).ready(function () {
 	    modalTitle = document.getElementById("trash-modal-title"),
 	    modalSize = document.getElementById("trash-modal-size");
 	
-	console.log(modalImg);
 	modalImg.className = "trash-modal-display";
 	modalImg.src = url;
 	modalTitle.innerHTML = title;
@@ -69,8 +63,6 @@ $(document).ready(function () {
 	    title,
 	    size;
 	
-	console.log(modalBody.children.length);
-
 	if (target.className === "trash-thumbnail") {
 	    var url = target.style.backgroundImage,	    
 			    
@@ -82,8 +74,6 @@ $(document).ready(function () {
 	   
 	    title = target.title;
 	    size = target.dataset.size;	
-
-	    console.log(target);
 
 	    if (modalBody.children.length === 1) {	    
 		makeModal(url, title, size);

@@ -11,18 +11,12 @@
 	- user profiles
 		- show posts you've commented / voted on
 - drag and drop file uploader
-	- show thumbnails
 	- allow for delete from server
 	- animate dashed border on dragenter
 	- drag and drop to re-arrange
 
 - captions and user created titles for images	
-- need to write callback handler for ajax response for drag and drop
-[[ base.html ]]
-  [[ block trash_home ]]
-    [[ block AJAX_response_template ]]
-
-- thumbnails now displaying.  I just need to size them down with css.
-  I also need to add functionality to edit captions and title as well
-  as delete photos.
+	- ajax for delete / edit of image
+- maybe remove gradient and border radius from boot strap buttons?
+- have the browser turn the bytes size for the image into a nice rounded MB number
 
