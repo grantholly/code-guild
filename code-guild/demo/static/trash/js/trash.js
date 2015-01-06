@@ -130,9 +130,11 @@ $(document).ready(function () {
 	    i;
 	
 	//add header to thumbnails
-	msg.innerHTML = "click on a preview to edit";
-	display.appendChild(msg);
-	msg.className = "trash-preview-header";	
+	if (display.firstElementChild === null) {
+	    msg.innerHTML = "click on a preview to edit";
+	    display.appendChild(msg);
+	    msg.className = "trash-preview-header";	
+	}
 
 	//maybe use DocumentFragment here for offline maniputlation
 	//then stuff the finished fragment into the DOM?
