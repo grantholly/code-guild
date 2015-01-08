@@ -51,23 +51,24 @@ def upload(request):
 	    upload.document = file
 	    upload.size = file_size
 	    upload.file_type = upload.get_file_type()
+	    upload.save()
 
 	    #loading the response json object
 	    obj = {}
 	    obj["file"] = {
+			"id": None,
 			"name": None,
 			"size": None,
 			"url": None,
 			}
+
 	    obj["file"]["name"] = upload.file_name
 	    obj["file"]["size"] = upload.size
 	    obj["file"]["url"] = upload.get_absolute_url()
+	    obj["file"]["id"] = upload.id
 
 	    json_response.append(obj)
-	    new_files.append(upload)
-	    
-	#create all files in one DB transaction from a list of Document instances
-	Document.objects.bulk_create(new_files)
+	
 	response = JSONResponse(json_response, mimetype=response_mimetype(request))
         return response
 
@@ -77,4 +78,4 @@ def edit(request):
 
 
 def delete(request):
-    pass
+    return HttpResonse("<h1>you did it!</h1>")

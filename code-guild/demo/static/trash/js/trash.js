@@ -32,11 +32,27 @@ $(document).ready(function () {
 
     var dropDiv = document.getElementById("uploader"),
         display = document.getElementById("display"),
+	deleteImage = document.getElementById("modal-image-delete"),
 	acceptedTypes = {
 	    "image/jpeg": true,
 	    "image/png": true,
 	    "image/gif": true
+	},
+	utils = {
+	    /*the string returned by element.style.backgroundImg
+	    has two sets of quotes!  Encoding and decoding &quot*/
+	    unFuckBackgroundImage: function (url) {
+		url = url.replace(url.charAt(url.length - 2), "");
+                url = url.replace(url.charAt(3), "");
+                url = url.substring(3, url.length - 2);
+		return url
+	    }
+	    //make an ajax shortcut here 
 	};
+
+    /*
+    this is a test comment (please ignore)
+    */
 
     //modal builder
     function makeModal (url, title, size) {
@@ -51,7 +67,20 @@ $(document).ready(function () {
 	modalImg.className = "trash-modal-display";
 	modalImg.src = url;
 	modalTitle.innerHTML = title;
-	modalSize.innerHTML = "size: " + size;
+	modalSize.innerHTML = "size: " + ((parseFloat(size) * .000001).toFixed(2)).toString() + " MB";
+    }
+    //click hander for modal image delete
+    deleteImage.onclick = function (id) {
+	var xhr = new XMLHttpRequest(),
+	    modalImg = document.getElementsByClassName("trash-modal-display")[0].src,
+	    targetImg = document.getElementsByClassName("trash-thumbnail") ? this.src: utils.unFuckBackgroundImg(this);
+	
+	console.log(modalImg);	
+	console.log(targetImg);
+
+	xhr.open("post", "delete/");
+	xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	xhr.send();
     }
 
     //add click handler to open modal
@@ -80,7 +109,6 @@ $(document).ready(function () {
 	    }
 	}
     }
-
 
     //AJAX POST request handler for dropped files
     function upload (files) {
@@ -135,6 +163,7 @@ $(document).ready(function () {
 	    div.id = "thumbnail-" + i;
 	    div.className = "trash-thumbnail";
 	    div.setAttribute("data-size", response[i].file.size);
+	    div.setAttribute("data-id", response[i].file.id);
 	    div.title = response[i].file.name;
 	    div.setAttribute("data-toggle", "modal");
 	    div.setAttribute("data-target", "#trash-modal");
