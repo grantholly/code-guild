@@ -78,4 +78,5 @@ def edit(request):
 
 
 def delete(request):
-    return HttpResonse("<h1>you did it!</h1>")
+    print request.POST
+    return HttpResponse("<h1>you did it!</h1>")

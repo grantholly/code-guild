@@ -73,14 +73,37 @@ $(document).ready(function () {
     deleteImage.onclick = function (id) {
 	var xhr = new XMLHttpRequest(),
 	    modalImg = document.getElementsByClassName("trash-modal-display")[0].src,
-	    targetImg = document.getElementsByClassName("trash-thumbnail") ? this.src: utils.unFuckBackgroundImg(this);
-	
-	console.log(modalImg);	
-	console.log(targetImg);
+	    thumbs = document.querySelectorAll("div.trash-thumbnail"),
+	    max = thumbs.length,
+	    data = {"pk": undefined},
+	    pk,
+	    i;
 
-	xhr.open("post", "delete/");
-	xhr.setRequestHeader("X-CSRFToken", csrftoken);
-	xhr.send();
+	console.log(modalImg);
+	console.log(thumbs);
+
+	/*
+	"http://127.0.0.1:8000/media/sin-city-a-dame-to-kill-for-poster-mickey-rourke_JrEnSPY.jpg"
+	the format of the modalImg needs to drop everything after the ip:port
+	that would be comparable to the backgroundImage property in the thumbnails
+	*/
+	
+	for (i = 0; i < max; i++) {
+	    thumbImg = utils.unFuckBackgroundImage(thumbs[i].style.backgroundImage);
+	    if (thumbImg === modalImg.slice(modalImg.indexOf(thumbImg))) {
+	        pk = thumbs[i].getAttribute("data-id");
+	        console.log(pk);
+		sendDelete(pk);
+	    }
+	}
+	
+	function sendDelete (pk) {
+	    data.pk = pk;
+	    console.log(data);
+	    xhr.open("post", "delete/");
+	    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	    xhr.send(data);
+	}
     }
 
     //add click handler to open modal
@@ -93,15 +116,8 @@ $(document).ready(function () {
 	    size;
 	
 	if (target.className === "trash-thumbnail") {
-	    var url = target.style.backgroundImage,	    
-			    
-	    //omfg double double quotes! die in a fucking fire.
-	    //really wish I was better with regex
-	    url = url.replace(url.charAt(url.length - 2), "");
-	    url = url.replace(url.charAt(3), "");
-	    url = url.substring(3, url.length - 2);
-	   
-	    title = target.title;
+	    url = utils.unFuckBackgroundImage(target.style.backgroundImage),	    
+	    title = target.title,
 	    size = target.dataset.size;	
 
 	    if (modalBody.children.length === 1) {	    
@@ -167,7 +183,7 @@ $(document).ready(function () {
 	    div.title = response[i].file.name;
 	    div.setAttribute("data-toggle", "modal");
 	    div.setAttribute("data-target", "#trash-modal");
-	    div.style.backgroundImage = "url(" + backgroundImg + ")";
+	    div.style.backgroundImage = 'url(' + backgroundImg + ')';
 	    display.appendChild(div);
 	}
     }
@@ -194,4 +210,5 @@ $(document).ready(function () {
 	this.className = "trash-uploader";
 	return false;
      }
+
 });
