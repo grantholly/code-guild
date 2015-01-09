@@ -2,8 +2,8 @@ __author__ = 'grant'
 
 a = 10
 
-if a / 10 == 0:
-    print('variable a is probably 10')
+if a - 10 == 0:
+    print('a is ten')
 
 if True:
     print('tis true')
