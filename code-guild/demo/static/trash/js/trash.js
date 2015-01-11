@@ -51,7 +51,8 @@ $(document).ready(function () {
 	};
 
     /*
-    this is a test comment (please ignore)
+    need to add the ability to change the user defined name of the picture
+    also need to add the ability to add a user defined caption
     */
 
     //modal builder
@@ -80,9 +81,8 @@ $(document).ready(function () {
 	    i;
 
 	/*
-	"http://127.0.0.1:8000/media/sin-city-a-dame-to-kill-for-poster-mickey-rourke_JrEnSPY.jpg"
-	the format of the modalImg needs to drop everything after the ip:port
-	that would be comparable to the backgroundImage property in the thumbnails
+	need to add some sort of visual feedback to confirm the delete
+	then only dispach the delete request if they confirm the delete
 	*/
 	
 	for (i = 0; i < max; i++) {
@@ -106,6 +106,7 @@ $(document).ready(function () {
 	xhr.onreadystatechange = function () {
 	    if ((xhr.readyState === 4) && (xhr.status === 200)) {
 		xhr.onload = function () {
+		    //need to add some sort of feedback that the delete went through
 		    console.log("It worked holy shit");
 		}
 	    }

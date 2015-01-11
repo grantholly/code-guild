@@ -21,6 +21,15 @@ class BlogPost(models.Model):
     def __unicode__(self):
 	return self.title
 
+    """
+    need to define a get_absolute_url method to use the reverse()
+    using from django.core.urlresolvers import reverse
+    e.g. def get_absolute_url(self):
+             return reverse('people.views.details', args=[str(self.id)])
+
+    this will be used by the search feature to search blogs
+    """
+
     class Meta:
 	verbose_name = "Blog Post"
 	ordering = ["-created"]
