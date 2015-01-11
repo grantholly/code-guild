@@ -69,18 +69,15 @@ $(document).ready(function () {
 	modalTitle.innerHTML = title;
 	modalSize.innerHTML = "size: " + ((parseFloat(size) * .000001).toFixed(2)).toString() + " MB";
     }
+
     //click hander for modal image delete
     deleteImage.onclick = function (id) {
 	var xhr = new XMLHttpRequest(),
 	    modalImg = document.getElementsByClassName("trash-modal-display")[0].src,
 	    thumbs = document.querySelectorAll("div.trash-thumbnail"),
 	    max = thumbs.length,
-	    data = {"pk": undefined},
 	    pk,
 	    i;
-
-	console.log(modalImg);
-	console.log(thumbs);
 
 	/*
 	"http://127.0.0.1:8000/media/sin-city-a-dame-to-kill-for-poster-mickey-rourke_JrEnSPY.jpg"
@@ -92,17 +89,26 @@ $(document).ready(function () {
 	    thumbImg = utils.unFuckBackgroundImage(thumbs[i].style.backgroundImage);
 	    if (thumbImg === modalImg.slice(modalImg.indexOf(thumbImg))) {
 	        pk = thumbs[i].getAttribute("data-id");
-	        console.log(pk);
 		sendDelete(pk);
 	    }
 	}
-	
-	function sendDelete (pk) {
-	    data.pk = pk;
-	    console.log(data);
-	    xhr.open("post", "delete/");
-	    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-	    xhr.send(data);
+    }
+
+    //AJAX POST request for deleting
+    function sendDelete (pk) {
+	var xhr = new XMLHttpRequest();
+
+	console.log(xhr);
+	xhr.open("post", "delete/");
+	xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("pk=" + pk);
+	xhr.onreadystatechange = function () {
+	    if ((xhr.readyState === 4) && (xhr.status === 200)) {
+		xhr.onload = function () {
+		    console.log("It worked holy shit");
+		}
+	    }
 	}
     }
 

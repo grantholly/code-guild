@@ -78,5 +78,5 @@ def edit(request):
 
 
 def delete(request):
-    print request.POST
+    print request.POST.get("pk", "")		
     return HttpResponse("<h1>you did it!</h1>")
