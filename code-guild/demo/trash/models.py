@@ -3,6 +3,11 @@ import datetime
 from django.db import models
 
 
+class DocumentActiveQuerySet(models.QuerySet):
+    def is_active(self):
+		return self.filter(active=True)
+
+
 class Document(models.Model):
     file_name = models.CharField(max_length=250, blank=True, null=True)
     document = models.FileField()
@@ -12,6 +17,9 @@ class Document(models.Model):
     caption = models.CharField(max_length=250, blank=True, null=True)
     size = models.IntegerField()
     file_type = models.CharField(max_length=50, blank=True, null=True)
+    active = models.BooleanField(default=True)
+
+    objects = DocumentActiveQuerySet.as_manager()
 
     def __unicode__(self):
 	return self.document.name

@@ -70,7 +70,7 @@ def upload(request):
 	    json_response.append(obj)
 	
 	response = JSONResponse(json_response, mimetype=response_mimetype(request))
-        return response
+    return response
 
 
 def edit(request):
@@ -78,5 +78,14 @@ def edit(request):
 
 
 def delete(request):
-    print request.POST.get("pk", "")		
-    return HttpResponse("<h1>you did it!</h1>")
+	if request.POST:
+		print("hi")
+        print(request.POST.get("pk", ""))
+	document_pk = request.POST.get("pk", "")
+	document_to_delete = Document.objects.get(pk=document_pk)
+	document_to_delete.active = False
+	document_to_delete.save()
+	return HttpResponse("<h1>picture was deleted</h1>")
+"""
+		return HttpResponse("<h1>picture was deleted</h1>")
+"""
