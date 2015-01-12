@@ -13,3 +13,24 @@ body {
     height: auto;
     display: none;
 }
+
+/*search*/
+.toggle {
+    display: none;
+}
+
+.search-submit-hidden {
+    display: none;
+}
+
+.container.search {
+    float:right;
+}
+
+.search-icon {
+    display: inline;
+}
+
+.search-results {
+    display: none;
+}
