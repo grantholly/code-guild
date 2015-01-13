@@ -55,8 +55,14 @@
     font-weight: bold;
 }
 
+.trash-modal-title-editor {
+    display: inline;
+    margin-left: 1em;
+    text-decoration: none;
+    font-weight: normal;
+}
+
 .trash-delete {
     float: left;
 }
-
 

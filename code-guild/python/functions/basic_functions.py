@@ -67,7 +67,7 @@ def s():
     z = 30
     def q():
 	print(z)
-    return q
+    return q()
 
 #the function object q is being returned
 
@@ -92,6 +92,7 @@ def r():
 
 #the nonlocal reserved word allows the local scope of e()
 #to import from the enclosing scope of r()
+#this is Python 3 only
 
 r()
 

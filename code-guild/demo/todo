@@ -11,12 +11,10 @@
 	- user profiles
 		- show posts you've commented / voted on
 - drag and drop file uploader
-	- allow for delete from server
 	- animate dashed border on dragenter
 	- drag and drop to re-arrange
+- wire up the user edits to db to update image title
+and add a caption.
 
-- captions and user created titles for images	
-	- ajax for delete / edit of image
 - maybe remove gradient and border radius from boot strap buttons?
-- have the browser turn the bytes size for the image into a nice rounded MB number
 
