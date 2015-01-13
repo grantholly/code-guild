@@ -51,9 +51,8 @@ $(document).ready(function () {
         };
 
     /*
-    I need to think about breaking this function up
-    that way the on hover doesn't do have to handle setting
-    up everything. 
+    need to add the ability to change the user defined name of the picture
+    also need to add the ability to add a user defined caption
     */
 
     //modal builder
@@ -62,81 +61,13 @@ $(document).ready(function () {
         var modalBox = document.getElementById("trash-modal"),
             modalParent = document.getElementById("trash-modal-content"),
             modalBody = document.getElementById("trash-modal-body"),
-            modalImg = document.getElementById("trash-modal-image"),
+            modalImg = modalBody.childNodes[3],
             modalTitle = document.getElementById("trash-modal-title"),
             modalSize = document.getElementById("trash-modal-size");
 
         modalImg.className = "trash-modal-display";
         modalImg.src = url;
         modalTitle.innerHTML = title;
-
-	//title hover effect to edit
-	modalTitle.onmouseenter = function () {
-	    var editField = document.createElement("input"),
-		editLink = document.createElement("a");
-
-	    editField.type = "text";
-	    editField.id = "trash-modal-title-input";
-	    editField.className = "form-control";
-
-	    editLink.innerHTML = "edit";
-	    editLink.id = "trash-modal-title-edit";
-	    editLink.className = "trash-modal-title-editor";
-
-	    modalTitle.appendChild(editLink);
-
-	    editLink.onclick = function () {
-		var currentTitle = modalTitle.innerHTML;
-	
-		editField.setAttribute("placeholder", currentTitle);
-		editField.focus();
-		editField.select(); 
-		modalTitle.parentElement.replaceChild(editField, modalTitle);
-/*
-will add the ability to submit new title over AJAX
-1. get pk of image
-
-        for (i = 0; i < max; i++) {
-            thumbImg = utils.unFuckBackgroundImage(thumbs[i].style.backgroundImage);
-            if (thumbImg === modalImg.slice(modalImg.indexOf(thumbImg))) {
-                pk = thumbs[i].getAttribute("data-id");
-                sendNewTitle(pk);
-
-2. send pk to sendNewTitle
-
-		editField.onkeydown = sendNewTitle(ev, pk)
-
-		function sendNewTitle (ev, pk) {
-		    if (ev.keycode === 13) {
-			var newTitle = editField.value,
-			    xhr = new XMLHttpReuqest();
-
-			xhr.open("POST", "edit/");
-			xhr.setRequestHeader("X-CSRFToken", csrftoken); 
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.send("pk=" + pk)
-		    }
-		}
-
-3. update the title in the DB
-4. set the modal title to the new title
-
-	if ((xhr.readystate === 4)&&(xhr.status === 200)) {
-	    xhr.onload = function (data) {
-		modalTitle.innerHTML = data.title
-	    }
-	}
-*/
-	    }
-	};
-
-	modalTitle.onmouseleave = function () {
-	    var editLink = document.getElementById("trash-modal-title-edit")
-	    if (editLink) {
-		editLink.parentElement.removeChild(editLink);
-	    }
-	};
-
         modalSize.innerHTML = "size: " + ((parseFloat(size) * 0.000001).toFixed(2)).toString() + " MB";
     }
 
@@ -148,6 +79,11 @@ will add the ability to submit new title over AJAX
             max = thumbs.length,
             pk,
             i;
+
+        /*
+	need to add some sort of visual feedback to confirm the delete
+	then only dispach the delete request if they confirm the delete
+	*/
 
         for (i = 0; i < max; i++) {
             thumbImg = utils.unFuckBackgroundImage(thumbs[i].style.backgroundImage);
@@ -162,6 +98,7 @@ will add the ability to submit new title over AJAX
     function sendDelete(pk) {
         var xhr = new XMLHttpRequest();
 
+        console.log(xhr);
         xhr.open("post", "delete/");
         xhr.setRequestHeader("X-CSRFToken", csrftoken);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
