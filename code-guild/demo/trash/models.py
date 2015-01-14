@@ -10,7 +10,7 @@ class DocumentActiveQuerySet(models.QuerySet):
 
 class Document(models.Model):
     """
-    this class impelement a soft delete.  By marking the record inactive (active = False),
+    this class impelements a soft delete.  By marking the record inactive (active = False),
     it means that the file still exists in both the DB and the file system.
     Transaction rollbacks and DB restores will cause problems when looking for
     files no longer existing in the file system.

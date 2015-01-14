@@ -7,12 +7,7 @@
 - other feature ideas:
 	- post / comment tagging
 	- search posts / comments
-		- save queries to db for reuse
-	- user profiles
-		- show posts you've commented / voted on
-- drag and drop file uploader
-	- animate dashed border on dragenter
-	- drag and drop to re-arrange
+- animate dashed border on dragenter
 - wire up the user edits to db to update image title
 and add a caption.
 

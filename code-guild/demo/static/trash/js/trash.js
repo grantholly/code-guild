@@ -1,7 +1,7 @@
 $(document).ready(function () {
     function getCookie(name) {
         var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
+        if (document.cookie && document.cookie != '') {
             var cookies = document.cookie.split(';');
             for (var i = 0; i < cookies.length; i++) {
                 var cookie = $.trim(cookies[i]);
@@ -40,21 +40,15 @@ $(document).ready(function () {
         },
         utils = {
             /*the string returned by element.style.backgroundImg
-	    has two sets of quotes!*/
+has two sets of quotes! Encoding and decoding &quot*/
             unFuckBackgroundImage: function (url) {
                 url = url.replace(url.charAt(url.length - 2), "");
                 url = url.replace(url.charAt(3), "");
                 url = url.substring(3, url.length - 2);
-                return url;
+                return url
             }
-            //make an ajax shortcut here 
+            //make an ajax shortcut here
         };
-
-    /*
-    I need to think about breaking this function up
-    that way the on hover doesn't do have to handle setting
-    up everything. 
-    */
 
     //modal builder
     function makeModal(url, title, size) {
@@ -65,79 +59,10 @@ $(document).ready(function () {
             modalImg = document.getElementById("trash-modal-image"),
             modalTitle = document.getElementById("trash-modal-title"),
             modalSize = document.getElementById("trash-modal-size");
-
         modalImg.className = "trash-modal-display";
         modalImg.src = url;
         modalTitle.innerHTML = title;
-
-	//title hover effect to edit
-	modalTitle.onmouseenter = function () {
-	    var editField = document.createElement("input"),
-		editLink = document.createElement("a");
-
-	    editField.type = "text";
-	    editField.id = "trash-modal-title-input";
-	    editField.className = "form-control";
-
-	    editLink.innerHTML = "edit";
-	    editLink.id = "trash-modal-title-edit";
-	    editLink.className = "trash-modal-title-editor";
-
-	    modalTitle.appendChild(editLink);
-
-	    editLink.onclick = function () {
-		var currentTitle = modalTitle.innerHTML;
-	
-		editField.setAttribute("placeholder", currentTitle);
-		editField.focus();
-		editField.select(); 
-		modalTitle.parentElement.replaceChild(editField, modalTitle);
-/*
-will add the ability to submit new title over AJAX
-1. get pk of image
-
-        for (i = 0; i < max; i++) {
-            thumbImg = utils.unFuckBackgroundImage(thumbs[i].style.backgroundImage);
-            if (thumbImg === modalImg.slice(modalImg.indexOf(thumbImg))) {
-                pk = thumbs[i].getAttribute("data-id");
-                sendNewTitle(pk);
-
-2. send pk to sendNewTitle
-
-		editField.onkeydown = sendNewTitle(ev, pk)
-
-		function sendNewTitle (ev, pk) {
-		    if (ev.keycode === 13) {
-			var newTitle = editField.value,
-			    xhr = new XMLHttpReuqest();
-
-			xhr.open("POST", "edit/");
-			xhr.setRequestHeader("X-CSRFToken", csrftoken); 
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.send("pk=" + pk)
-		    }
-		}
-
-3. update the title in the DB
-4. set the modal title to the new title
-
-	if ((xhr.readystate === 4)&&(xhr.status === 200)) {
-	    xhr.onload = function (data) {
-		modalTitle.innerHTML = data.title
-	    }
-	}
-*/
-	    }
-	};
-
-	modalTitle.onmouseleave = function () {
-	    var editLink = document.getElementById("trash-modal-title-edit")
-	    if (editLink) {
-		editLink.parentElement.removeChild(editLink);
-	    }
-	};
-
-        modalSize.innerHTML = "size: " + ((parseFloat(size) * 0.000001).toFixed(2)).toString() + " MB";
+        modalSize.innerHTML = "size: " + ((parseFloat(size) * .000001).toFixed(2)).toString() + " MB";
     }
 
     //click hander for modal image delete
@@ -149,6 +74,10 @@ will add the ability to submit new title over AJAX
             pk,
             i;
 
+	/*
+	need to add some visual feedback after the delete is sent
+	*/
+
         for (i = 0; i < max; i++) {
             thumbImg = utils.unFuckBackgroundImage(thumbs[i].style.backgroundImage);
             if (thumbImg === modalImg.slice(modalImg.indexOf(thumbImg))) {
@@ -156,12 +85,11 @@ will add the ability to submit new title over AJAX
                 sendDelete(pk);
             }
         }
-    };
+    }
 
     //AJAX POST request for deleting
     function sendDelete(pk) {
         var xhr = new XMLHttpRequest();
-
         xhr.open("post", "delete/");
         xhr.setRequestHeader("X-CSRFToken", csrftoken);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -169,11 +97,10 @@ will add the ability to submit new title over AJAX
         xhr.onreadystatechange = function () {
             if ((xhr.readyState === 4) && (xhr.status === 200)) {
                 xhr.onload = function () {
-                    //need to add some sort of feedback that the delete went through
                     console.log("It worked holy shit");
-                };
+                }
             }
-        };
+        }
     }
 
     //add click handler to open modal
@@ -184,17 +111,15 @@ will add the ability to submit new title over AJAX
             url,
             title,
             size;
-
         if (target.className === "trash-thumbnail") {
             url = utils.unFuckBackgroundImage(target.style.backgroundImage),
             title = target.title,
             size = target.dataset.size;
-
             if (modalBody.children.length === 1) {
                 makeModal(url, title, size);
             }
         }
-    };
+    }
 
     //AJAX POST request handler for dropped files
     function upload(files) {
@@ -219,13 +144,13 @@ will add the ability to submit new title over AJAX
             xhr.onreadystatechange = function () {
                 if ((xhr.readyState === 4) && (xhr.status === 200)) {
                     //callback function for handling the server response contained in data
-                    xhr.onload = showThumbnails(xhr.response);
+                    xhr.onload = showThumbnails(xhr.response)
                 }
-            };
+            }
         }
     }
 
-    //AJAX callback handler	
+    //AJAX callback handler
     function showThumbnails(data) {
         var response = JSON.parse(data),
             div = document.createElement("div"),
@@ -233,18 +158,15 @@ will add the ability to submit new title over AJAX
             max = response.length,
             i;
 
-        //add header to thumbnails
         if (display.firstElementChild === null) {
             msg.innerHTML = "click on a preview to edit";
             display.appendChild(msg);
             msg.className = "trash-preview-header";
         }
 
-        //maybe use DocumentFragment here for offline maniputlation
-        //then stuff the finished fragment into the DOM?
         for (i = 0; i < max; i++) {
-            var backgroundImg = response[i].file.url;
-
+            var div = document.createElement("div"),
+                backgroundImg = response[i].file.url;
             div.id = "thumbnail-" + i;
             div.className = "trash-thumbnail";
             div.setAttribute("data-size", response[i].file.size);
@@ -260,24 +182,22 @@ will add the ability to submit new title over AJAX
     dropDiv.ondrop = function (ev) {
         var max = ev.dataTransfer.files.length,
             i;
-
         ev.preventDefault();
         ev.stopPropagation();
         //return to base css class after dropping
         this.className = "trash-uploader";
         upload(ev.dataTransfer.files);
-    };
+    }
 
     //add visual feedback during dragging
     dropDiv.ondragover = function () {
         this.className = "trash-uploader dragover";
         return false;
-    };
+    }
 
     //return to base css class
     dropDiv.ondragleave = function () {
         this.className = "trash-uploader";
         return false;
-    };
-
+    }
 });
