@@ -128,7 +128,7 @@ def memoize(duration=10):
     return _memoize
 
 # memoize the function and cache for 10 seconds
-memoize(10)
+@memoize(10)
 def calculation(a, b):
    go_to = range(len(b))
    for i in go_to:
