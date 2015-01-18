@@ -13,6 +13,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static "css/base.css" %}">
     {% block stylesheet %}
     {% endblock stylesheet %}
@@ -53,11 +54,18 @@
       <div class="ron-wrapper">
 	 <img src="http://www.reactiongifs.com/wp-content/uploads/2013/12/aVOSkIC.gif"></img>
       </div>
-	{% block content %}
-        {% endblock content %}
-	{% block profile %}
-	{% endblock profile %}
+	  {% block content %}
+      {% endblock content %}
+	  {% block profile %}
+	  {% endblock profile %}
       <p>Django is a python powered web development framework</p>
+      <div class="search">    
+        <i class="fa fa-trash fa-3x"></i>
+        {% csrf_token %}
+        <input id="search-field" type="search" placeholder="search">
+      </div>
+      <ul id="search-results" class="search-results">
+      </ul>
     </div>
 
     <div class="container trash">

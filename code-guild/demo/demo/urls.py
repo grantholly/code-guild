@@ -27,6 +27,9 @@ urlpatterns = patterns('',
     # trash urls
     url(r'^trash/', include('trash.urls', namespace='trash', app_name='trash')),
 
+    # search urls
+    url(r'^search/', include('search.urls', namespace='search', app_name='search')),
+                       
     # admin urls
     url(r'^admin/', include(admin.site.urls)),
     url(r'^markdown/', include('django_markdown.urls')),

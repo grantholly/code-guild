@@ -64,10 +64,3 @@ def get_comments(request):
 	return HttpResponse(comments, content_type="application/json")
 
 
-def search(request):
-    query = request.GET.get("query", "")
-    # todo - check for query in post body, comment body, or by tag
-    results = BlogPost.objects.filter(body__contains=query)
-    return HttpResponse(results, content_type="application/json")
-
-

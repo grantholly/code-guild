@@ -41,8 +41,7 @@ $(document).ready(function () {
                 },
                     "success": function (data) {
                     var i,
-                    end = data.length,
-                        $commentWrapper = $("<div></div>");
+                        end = data.length;
                         for (i = 0; i < end; i++) {
                             $comments.append($("<p></p>").html(data[i].fields.created).addClass("comment-created"));
                             $comments.append($("<div></div>").html(data[i].fields.body).addClass("comment-body"));
