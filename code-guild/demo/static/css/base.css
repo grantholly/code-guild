@@ -7,6 +7,19 @@ body {
   background-color: #17d1ff;
 }
 
+/* login */
+.password-reset-toggle a {
+    text-decoration: none;
+}
+
+.password-reset {
+    padding: 4px;
+    margin-top: 10px;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    display: none;
+}
+
 /* ron */
 .ron-wrapper img {
     width: 100%;
@@ -22,6 +35,14 @@ body {
     border-radius: 4px;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.search-results a {
+    text-decoration: none;
+}
+
+.search-results a:hover {
+    background-color: rgb(220, 220, 220);
 }
 
 #search {
@@ -59,7 +80,7 @@ body {
 
 .search:hover input, .search input:focus {
     width: 200px;
-    margin-left: 0px;
+    margin-left: 2px;
 }
 
 

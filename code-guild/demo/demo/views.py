@@ -2,6 +2,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
+from django.contrib.auth.views import password_reset
+from django.core.urlresolvers import reverse
 
 from .forms import MyRegistrationForm
 
@@ -24,15 +26,12 @@ def authenticate(request):
 	return HttpResponseRedirect('/invalid')
 
 def login_success(request):
-
     return render_to_response('login_success.html', {'first_name': request.user.username})
 
 def invalid(request):
-
     return render_to_response('invalid.html')
 
 def logout(request):
-
     return render_to_response('logout.html')
 
 def register(request):
@@ -52,6 +51,5 @@ def register(request):
     return render_to_response('register.html', token)
 
 def register_success(request):
-
     return render_to_response('register_success.html')
 

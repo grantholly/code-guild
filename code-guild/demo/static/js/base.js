@@ -29,7 +29,16 @@ $(document).ready(function () {
             }
         }
     });
+    
+    /*
+    Login
+    */
 
+    $("a.password-reset-toggle").click(function (ev) {
+        ev.preventDefault();
+        $("div.password-reset").toggle("fast");
+    })
+    
     /*
     Ron
     */

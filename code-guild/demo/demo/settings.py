@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'tags',
     'endless_pagination',
     'trash',
+    'password_reset',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -80,6 +81,9 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.static',
 )
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 
 ROOT_URLCONF = 'demo.urls'
 

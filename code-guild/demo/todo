@@ -1,9 +1,8 @@
 - merge all blog js into one file
 	- maybe use Require js to dmeonstrate managed js modules
 - link logins to voting maybe?
-- password reset through email code
-	- captcha for registration
-	- multi factor auth with SMS message (twilio?)
+- captcha for registration
+	- multi factor auth with SMS message (twilio? rapidSMS?)
 - other feature ideas:
 	- post / comment tagging
 	- search posts / comments

@@ -13,6 +13,9 @@ urlpatterns = patterns('',
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^login_success/$', views.login_success, name='login_success'),
     url(r'^invalid/$', views.invalid, name='invalid'),
+                       
+    # password recovery urls
+    url(r'^password_recover/', include('password_reset.urls')),
 
     # registration urls
     url(r'^register/$', views.register, name='register'),

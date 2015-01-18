@@ -2,16 +2,22 @@
 
 {% block content %}
 
-          {% if form.errors %}
-            <p class="alert alert-error">Invalid username/password</p>
-          {% endif %}
+{% if form.errors %}
+<p class="alert alert-error">Invalid username/password</p>
+{% endif %}
 
-	    <form action="/authenticate/" method="post">
-		{% csrf_token %}
-    		<label for="username">User name:</label>
-    		<input type="text" name="username" value="" id="username">
-    		<label for="password">Password:</label>
-    		<input type="password" name="password" value="" id="password">
-		<button class="btn btn-primary btn-xs" type="submit">Sign In</button>
-	    </form>
+<form action="{% url 'authenticate' %}" method="post">
+{% csrf_token %}
+  <label for="username">User name:</label>
+  <input type="text" name="username" value="" id="username">
+  <label for="password">Password:</label>
+  <input type="password" name="password" value="" id="password">
+  <button class="btn btn-primary btn-xs" type="submit">Sign In</button>
+</form>
+<a class="password-reset-toggle" href="">What's my password?</a>
+<div class="password-reset">
+  <p>you forgot your damn password didn't you?</p>
+  <p>its cool man, I do it all the time</p>
+  <p>click <a href="{% url 'password_reset_recover' %}">this shit</a> to fix things</p>
+</div>    
 {% endblock content %}
