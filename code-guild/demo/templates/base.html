@@ -59,10 +59,18 @@
 	  {% block profile %}
 	  {% endblock profile %}
       <p>Django is a python powered web development framework</p>
-      <div class="search">    
-        <i class="fa fa-trash fa-3x"></i>
-        {% csrf_token %}
-        <input id="search-field" type="search" placeholder="search">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-xs-offset-2">    
+            <div class="search">
+              <input type="search" id="search-field" class="form-control" placeholder="Search" />
+                <button type="submit" class="btn btn-primary btn-sm search-hover-button">
+                  <i class="fa fa-trash fa-lg"></i>
+                </button>
+                
+            </div>
+          </div>
+        </div>
       </div>
       <ul id="search-results" class="search-results">
       </ul>

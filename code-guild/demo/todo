@@ -1,15 +1,15 @@
 - merge all blog js into one file
-	- maybe use Require js to demonstrate managed js modules
+	- maybe use Require js to dmeonstrate managed js modules
 - link logins to voting maybe?
 - password reset through email code
-	- django-recaptcha for registration
+	- captcha for registration
 	- multi factor auth with SMS message (twilio?)
 - other feature ideas:
 	- post / comment tagging
+	- search posts / comments
 - animate dashed border on dragenter
 - wire up the user edits to db to update image title
 and add a caption.
-- add search functionality to search comments or blogs
-	- maybe a checkbox or something?
-- maybe remove gradient and border radius from boot strap buttons?
+
+- maybe remove gradient and border radius from boot strap buttons and form fields?
 

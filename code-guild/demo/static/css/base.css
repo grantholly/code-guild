@@ -7,31 +7,67 @@ body {
   background-color: #17d1ff;
 }
 
-/*ron*/
+/* ron */
 .ron-wrapper img {
     width: 100%;
     height: auto;
     display: none;
 }
 
-/*search
-.toggle {
-    display: none;
-}
-
-.search-submit-hidden {
-    display: none;
-}
-
-.container.search {
-    float:right;
-}
-
-.search-icon {
-    display: inline;
-}
+/* search */
 
 .search-results {
-    display: none;
+    background-color: rgb(255, 255, 255);
+    list-style-type: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
-*/
+
+#search {
+    float: right;
+    margin-top: 9px;
+    width: 250px;
+}
+
+.search {
+    padding: 5px 0;
+    width: 230px;
+    height: 30px;
+    position: relative;
+    left: 10px;
+    float: left;
+    line-height: 22px;
+    margin-bottom: 10px;
+}
+
+.search input {
+    position: absolute;
+    width: 0px;
+    float: Left;
+    margin-left: 210px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    height: 30px;
+    line-height: 18px;
+    padding: 2px 2px 0 2px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.search:hover input, .search input:focus {
+    width: 200px;
+    margin-left: 0px;
+}
+
+
+.search-hover-button {
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
