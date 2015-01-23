@@ -1,0 +1,57 @@
+-- basic commands --
+git status - show the current status of a repository
+
+git add - add a file into verison control and andd changes into a commit
+
+git rm - remove a file from being tracked by git
+
+git reset HEAD - discard changes you've made
+
+git stash - save your current changes in the working directory, but
+            remove them from the current commit
+
+git commit - wrap up a number of changed files into a commit
+             with a message describing the changes made
+
+git push - send a commit to remote repository (github.com)
+           you can also push commits to a branch other than master
+           git push origin my_branch
+
+-- branching --
+
+git branch - create a branch from the current branch (usually master)
+
+git branch -a - list all the branches
+
+git checkout branch - work on the tip of the specified branch
+
+git branch -D branch - get rid of a branch
+
+-- merging --
+
+first checkout a branch that you want to merge INTO !!!
+
+git merge branch - merge the changes on one branch into the current branch
+
+-- forking --
+
+git clone - copies an entire repo and commit history
+
+git fetch - sync local repository with remote repository
+            then you can push the changes to your remote fork
+
+git pull - fetch and push all in one
+
+git remote -v - show all remote repositories
+
+git remote add upstream - add additional remote repositories
+
+-- !!danger zone!! --
+
+git reset --hard commithash - resets your repository to a specified commit hash
+                              this is wipe out commits and commit history
+
+git rebase  - this resets the head of a branch to another branch
+
+git drop stash - wipe out your stashed local changes  
+
