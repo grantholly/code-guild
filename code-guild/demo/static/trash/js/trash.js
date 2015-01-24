@@ -31,13 +31,6 @@ $(document).ready(function () {
     });
 
     var dropDiv = document.getElementById("uploader"),
-        display = document.getElementById("display"),
-        deleteImage = document.getElementById("modal-image-delete"),
-        acceptedTypes = {
-            "image/jpeg": true,
-                "image/png": true,
-                "image/gif": true
-        },
         utils = {
             /*the string returned by element.style.backgroundImg
 has two sets of quotes! Encoding and decoding &quot*/
@@ -46,17 +39,18 @@ has two sets of quotes! Encoding and decoding &quot*/
                 url = url.replace(url.charAt(3), "");
                 url = url.substring(3, url.length - 2);
                 return url
-            }
-            //make an ajax shortcut here
+            },
+            acceptedTypes: {
+            "image/jpeg": true,
+                "image/png": true,
+                "image/gif": true
+            },
         };
 
     //modal builder
     function makeModal(url, title, size) {
         //list out child nodes of parent for assignment of title, size, image url
-        var modalBox = document.getElementById("trash-modal"),
-            modalParent = document.getElementById("trash-modal-content"),
-            modalBody = document.getElementById("trash-modal-body"),
-            modalImg = document.getElementById("trash-modal-image"),
+        var modalImg = document.getElementById("trash-modal-image"),
             modalTitle = document.getElementById("trash-modal-title"),
             modalSize = document.getElementById("trash-modal-size");
         modalImg.className = "trash-modal-display";
@@ -64,9 +58,34 @@ has two sets of quotes! Encoding and decoding &quot*/
         modalTitle.innerHTML = title;
         modalSize.innerHTML = "size: " + ((parseFloat(size) * .000001).toFixed(2)).toString() + " MB";
     }
+    
+    //mouseover event handler to add edit link for title
+    document.getElementById("trash-modal-title").onmouseover = function () {
+        var editLink = document.createElement("a"),
+            modalTitle = document.getElementById("trash-modal-title");
+            //modalHeader = document.getElementById("trash-modal-header");
+        
+        editLink.innerHTML = "edit";
+        editLink.id = "title-edit-link";
+        editLink.className = "trash-title-editor";
+        if (modalTitle.childElementCount  === 0) {
+            modalTitle.appendChild(editLink);
+        }
+    }
+    
+    //mouseout event handler to remove the edit link for title
+    document.getElementById("trash-modal-title").onmouseout = function () {
+        var editLink = document.getElementById("title-edit-link"),
+            modalTitle = document.getElementById("trash-modal-title");
+            //modalHeader = document.getElementById("trash-modal-header");
+        
+        if (modalTitle.childElementCount > 0) {
+            modalTitle.removeChild(editLink)
+        }
+    }
 
     //click hander for modal image delete
-    deleteImage.onclick = function (id) {
+    document.getElementById("modal-image-delete").onclick = function (id) {
         var xhr = new XMLHttpRequest(),
             modalImg = document.getElementsByClassName("trash-modal-display")[0].src,
             thumbs = document.querySelectorAll("div.trash-thumbnail"),
@@ -104,7 +123,7 @@ has two sets of quotes! Encoding and decoding &quot*/
     }
 
     //add click handler to open modal
-    display.onclick = function (ev) {
+    document.getElementById("display").onclick = function (ev) {
         ev = ev || window.event;
         var target = ev.target || ev.srcElement,
             modalBody = document.getElementById("trash-modal-body"),
@@ -131,7 +150,7 @@ has two sets of quotes! Encoding and decoding &quot*/
         //loop through the files array and send each file individually
         for (i = 0; i < max; i++) {
             //check for acepted picture file type
-            if (acceptedTypes[files[i].type]) {
+            if (utils.acceptedTypes[files[i].type]) {
                 formData.append("file_" + i, files[i]);
             }
         }
@@ -153,6 +172,7 @@ has two sets of quotes! Encoding and decoding &quot*/
     //AJAX callback handler
     function showThumbnails(data) {
         var response = JSON.parse(data),
+            display = document.getElementById("display"),
             div = document.createElement("div"),
             msg = document.createElement("h3"),
             max = response.length,
