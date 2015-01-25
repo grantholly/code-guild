@@ -23,13 +23,14 @@
       <div id="trash-modal-content" class="modal-content">
         <div id="trash-modal-header" class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 id="trash-modal-title" class="modal-title" id="myModalLabel"></h4>
+          <h4 id="trash-modal-title" class="modal-title"></h4>
+          <a id="trash-title-edit-link" class="trash-modal-title-edit">edit</a>    
         </div>
         <div id="trash-modal-body" class="modal-body trash-modal-body">
 	  <img id="trash-modal-image"></img>
         </div>
         <div id="trash-modal-footer" class="modal-footer">
-	  <button type="button" id="modal-image-delete" class="btn btn-danger trash-delete">Delete</button>
+	  <button type="button" id="trash-modal-image-delete" class="btn btn-danger trash-delete">Delete</button>
 	  <p id="trash-modal-size" class="trash-file-size"></p>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>

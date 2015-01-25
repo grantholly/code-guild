@@ -59,33 +59,11 @@ has two sets of quotes! Encoding and decoding &quot*/
         modalSize.innerHTML = "size: " + ((parseFloat(size) * .000001).toFixed(2)).toString() + " MB";
     }
     
-    //mouseover event handler to add edit link for title
-    document.getElementById("trash-modal-title").onmouseover = function () {
-        var editLink = document.createElement("a"),
-            modalTitle = document.getElementById("trash-modal-title");
-            //modalHeader = document.getElementById("trash-modal-header");
-        
-        editLink.innerHTML = "edit";
-        editLink.id = "title-edit-link";
-        editLink.className = "trash-title-editor";
-        if (modalTitle.childElementCount  === 0) {
-            modalTitle.appendChild(editLink);
-        }
-    }
+    //click handler for modal title edit
+    document.getElementById("trash-title-edit-link")
     
-    //mouseout event handler to remove the edit link for title
-    document.getElementById("trash-modal-title").onmouseout = function () {
-        var editLink = document.getElementById("title-edit-link"),
-            modalTitle = document.getElementById("trash-modal-title");
-            //modalHeader = document.getElementById("trash-modal-header");
-        
-        if (modalTitle.childElementCount > 0) {
-            modalTitle.removeChild(editLink)
-        }
-    }
-
     //click hander for modal image delete
-    document.getElementById("modal-image-delete").onclick = function (id) {
+    document.getElementById("trash-modal-image-delete").onclick = function (id) {
         var xhr = new XMLHttpRequest(),
             modalImg = document.getElementsByClassName("trash-modal-display")[0].src,
             thumbs = document.querySelectorAll("div.trash-thumbnail"),

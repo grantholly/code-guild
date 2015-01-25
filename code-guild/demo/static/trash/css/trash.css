@@ -53,14 +53,19 @@
 
 .modal-title {
     font-weight: bold;
+    display: inline-block;
 }
 
-.trash-title-editor {
+a.trash-modal-title-edit {
+    display: none;
+}
+
+.modal-header:hover a.trash-modal-title-edit {
     display: inline-block;
-    margin-left: 1em;
     text-decoration: none;
     font-weight: normal;
-}
+    margin-left: 1em;
+} 
 
 .trash-delete {
     float: left;
