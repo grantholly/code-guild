@@ -128,14 +128,14 @@ has two sets of quotes! Encoding and decoding &quot*/
                 xhr.onload = function () {
                     var modalHeader = document.getElementById("trash-modal-header"),
                         modalTitleInput = document.getElementById("trash-title-edit-field"),
-                        thumbnails = document.getElementsByClassName("trash-thumbnail"),
                         modalTitle = document.createElement("h4"),
-                        max = thumbnails.length,
-                        i;
+                        thumbnail = document.querySelector("div.trash-thumbnail[data-id='" + pk + "']")
                     
                     modalTitle.className = "modal-title";
                     modalTitle.id = "trash-modal-title";
                     modalTitle.innerHTML = title;
+                    
+                    thumbnail.title = title;
                     
                     modalHeader.replaceChild(modalTitle, modalTitleInput);
                 }
