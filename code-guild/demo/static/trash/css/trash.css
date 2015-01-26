@@ -40,6 +40,10 @@
 
 /* modal box */
 
+.modal-hidden {
+    display: none;
+}
+
 .trash-modal-display {
     max-width: 100%;
     max-height: 100%;
@@ -65,7 +69,12 @@ a.trash-modal-title-edit {
     text-decoration: none;
     font-weight: normal;
     margin-left: 1em;
-} 
+    cursor: pointer;
+}
+
+.modal-header .trash-modal-title-edit-field:focus a.trash-modal-title-edit {
+    display: none;
+}
 
 .trash-delete {
     float: left;

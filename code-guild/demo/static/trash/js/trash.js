@@ -48,40 +48,105 @@ has two sets of quotes! Encoding and decoding &quot*/
         };
 
     //modal builder
-    function makeModal(url, title, size) {
+    function makeModal(url, title, size, pk) {
         //list out child nodes of parent for assignment of title, size, image url
         var modalImg = document.getElementById("trash-modal-image"),
             modalTitle = document.getElementById("trash-modal-title"),
             modalSize = document.getElementById("trash-modal-size");
         modalImg.className = "trash-modal-display";
         modalImg.src = url;
+        modalImg.dataset.id = pk;
         modalTitle.innerHTML = title;
         modalSize.innerHTML = "size: " + ((parseFloat(size) * .000001).toFixed(2)).toString() + " MB";
     }
     
     //click handler for modal title edit
-    document.getElementById("trash-title-edit-link")
-    
-    //click hander for modal image delete
-    document.getElementById("trash-modal-image-delete").onclick = function (id) {
-        var xhr = new XMLHttpRequest(),
-            modalImg = document.getElementsByClassName("trash-modal-display")[0].src,
-            thumbs = document.querySelectorAll("div.trash-thumbnail"),
-            max = thumbs.length,
-            pk,
-            i;
-
-	/*
-	need to add some visual feedback after the delete is sent
-	*/
-
-        for (i = 0; i < max; i++) {
-            thumbImg = utils.unFuckBackgroundImage(thumbs[i].style.backgroundImage);
-            if (thumbImg === modalImg.slice(modalImg.indexOf(thumbImg))) {
-                pk = thumbs[i].getAttribute("data-id");
-                sendDelete(pk);
+    document.getElementById("trash-title-edit-link").onclick = function () {
+        var modalTitle = document.getElementById("trash-modal-title"),
+            modalHeader = document.getElementById("trash-modal-header"),
+            editField = document.createElement("input"),
+            editLink = document.getElementById("trash-title-edit-link"),
+            titleText = modalTitle.innerHTML;
+        
+        editField.attributes.type = "text";
+        editField.id = "trash-title-edit-field";
+        editField.className = "form-control trash-modal-title-edit-field";
+        editField.placeholder = titleText;
+        editField.setAttribute("maxLength", 100);
+        
+        editField.onfocus = function () {
+            editLink.classList.add("modal-hidden");
+        }
+        
+        editField.onblur = function () {
+            editLink.classList.remove("modal-hidden");
+        }
+        
+        //keydown handler for hitting enter to submit
+        editField.onkeydown = function (ev) {
+            var modalTitle = document.createElement("h4"),
+                focused = document.activeElement,
+                title;
+            
+            ev.stopPropagation();
+            modalTitle.id = "trash-modal-title";
+            modalTitle.className = "modal-title";
+            
+            //if they hit enter, send AJAX POST request
+            if (ev.keyCode === 13) {
+                var pk = document.getElementById("trash-modal-image").dataset.id,
+                    title = this.value;
+                sendTitle(pk, title);
+            }
+            
+            //if they hit escape or click off the field
+            if ((ev.keyCode === 27) || this !== focused) {
+                modalTitle.innerHTML = titleText;
+                modalHeader.replaceChild(modalTitle, editField);
             }
         }
+        
+        modalHeader.replaceChild(editField, modalTitle);
+        editField.focus();
+        
+        //todo: remove the hoveing edit
+    }
+    
+    //AJAX POST request for changing modal image title
+    function sendTitle (pk, title) {
+        var xhr = new XMLHttpRequest(),
+            formData = new FormData();
+        
+        formData.append("pk", pk);
+        formData.append("title", title);
+            
+        xhr.open("POST", "edit/");
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        xhr.send(formData);
+        xhr.onreadystatechange = function () {
+            if ((xhr.readyState === 4) && (xhr.status === 200)) {
+                xhr.onload = function () {
+                    var modalHeader = document.getElementById("trash-modal-header"),
+                        modalTitleInput = document.getElementById("trash-title-edit-field"),
+                        thumbnails = document.getElementsByClassName("trash-thumbnail"),
+                        modalTitle = document.createElement("h4"),
+                        max = thumbnails.length,
+                        i;
+                    
+                    modalTitle.className = "modal-title";
+                    modalTitle.id = "trash-modal-title";
+                    modalTitle.innerHTML = title;
+                    
+                    modalHeader.replaceChild(modalTitle, modalTitleInput);
+                }
+            }
+        }
+    }
+    
+    //click hander for modal image delete
+    document.getElementById("trash-modal-image-delete").onclick = function () {
+        var pk = document.getElementById("trash-modal-image").dataset.id;
+        sendDelete(pk);
     }
 
     //AJAX POST request for deleting
@@ -95,6 +160,9 @@ has two sets of quotes! Encoding and decoding &quot*/
             if ((xhr.readyState === 4) && (xhr.status === 200)) {
                 xhr.onload = function () {
                     console.log("It worked holy shit");
+                    	/*
+	                   need to add some visual feedback after the delete is sent
+	                   */
                 }
             }
         }
@@ -105,15 +173,17 @@ has two sets of quotes! Encoding and decoding &quot*/
         ev = ev || window.event;
         var target = ev.target || ev.srcElement,
             modalBody = document.getElementById("trash-modal-body"),
+            pk,
             url,
             title,
             size;
         if (target.className === "trash-thumbnail") {
             url = utils.unFuckBackgroundImage(target.style.backgroundImage),
+            pk = target.dataset.id,
             title = target.title,
             size = target.dataset.size;
             if (modalBody.children.length === 1) {
-                makeModal(url, title, size);
+                makeModal(url, title, size, pk);
             }
         }
     }
@@ -147,7 +217,7 @@ has two sets of quotes! Encoding and decoding &quot*/
         }
     }
 
-    //AJAX callback handler
+    //AJAX sendFile callback handler
     function showThumbnails(data) {
         var response = JSON.parse(data),
             display = document.getElementById("display"),
@@ -177,6 +247,7 @@ has two sets of quotes! Encoding and decoding &quot*/
         }
     }
 
+    //ondrop event handler to send the files in the dataTransfer object to AJAX request
     dropDiv.ondrop = function (ev) {
         var max = ev.dataTransfer.files.length,
             i;
