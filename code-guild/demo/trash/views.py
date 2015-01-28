@@ -74,7 +74,13 @@ def upload(request):
 
 
 def edit(request):
-    pass
+    if request.POST:
+        document_pk = request.POST.get("pk", "")
+        new_title = request.POST.get("title", "")
+        document_to_edit = Document.objects.get(pk=document_pk)
+        document_to_edit.user_title = new_title
+        document_to_edit.save()
+        return HttpResponse("<h1>new title added</h1>")
 
 
 def delete(request):

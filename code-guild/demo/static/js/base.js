@@ -89,9 +89,15 @@ $(document).ready(function () {
     
     //keyup event handler for search
     $("#search-field").keyup(function () {
-        var query = $(this).val();
+        if ($("#search-results").is(":hidden")) {
+            $("#search-results").show();
+        }
+        var query = $(this).val();   
         //todo: only send request if the field is not empty
-        //todo: don't send request if the key press is not a letter key
+        //todo: don't send request if the key press is not a character key
         sendQuery(query);
+    }).blur(function () {
+        var $searchResults = $("#search-results");
+        $searchResults.hide();
     })
 });
