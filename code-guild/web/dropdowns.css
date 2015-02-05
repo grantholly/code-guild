@@ -1,3 +1,18 @@
+/* text effect */
+
+.menu-title {
+	transition-property: font-size;
+	transition-duration: 1s;
+	transition-delay: 1s;
+	font-size: 24px;
+}
+
+.menu-title:hover {
+	transition-property: font-size;
+	transition-duration: 1s;
+	transition-delay: 1s;
+	font-size: 48px;
+}
 
 div.menu-bar {
 	position: relative;
