@@ -1,15 +1,17 @@
 import porc
-
-API_KEY = "7f516c0e-8468-4db9-b7fd-602c5c600df7"
+"""
+register an account with orchestrate.io and create an API key
+"""
+API_KEY = "7f516c0e-8468-4db9-b7fd-602c5c6d0df7"
 
 """
 This is your "database" for remote storage.
 It uses key value stores and stores objects in
-JSON format.
+JSON format.  Collections are kind of like tables.
 """
 COLLECTION = "python_db"
 """
-A key roughly maps to a specific "table" or "schema"
+A key roughly maps to a specific piece of data
 in your database.  A database can have multiple
 tables for storing different kinds of related data.
 """
